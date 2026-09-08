@@ -1,10 +1,11 @@
 # Glúteos Pro — Quiz Funnel
 
 Quiz funnel de venta para un programa de entrenamiento de glúteos (nicho fitness femenino),
-reconstruido a partir del ángulo de mercado de [gluteosappbrazil.site](https://gluteosappbrazil.site) —
-mismo flujo de 13 preguntas, misma oferta/estructura (diagnóstico → perfil → coach → gate de
-video → oferta con bonos y garantía) — pero como código propio, sobre el mismo motor
-config-driven ya usado en `calistenia-pro`.
+reconstruido a partir del ángulo de mercado, la estructura y el diseño de
+[gluteosappbrazil.site](https://gluteosappbrazil.site) — mismo flujo de portada + 13 preguntas
++ perfil + coach + gate de video + oferta con bonos y garantía, misma paleta blanco/rosa,
+mismo layout paso a paso — pero como código propio, sobre el motor config-driven ya usado en
+`calistenia-pro`.
 
 ## Qué NO se copió tal cual del sitio analizado (y por qué)
 
@@ -35,8 +36,11 @@ video) sigue de cerca la estructura del sitio analizado.
 - `index.html` — el quiz completo (motor config-driven, 1 solo archivo, vanilla JS, sin frameworks).
 - `server.js` — servidor estático minimalista (sin dependencias) para producción / Railway.
 - `package.json` — script `start` que corre `server.js`.
-- `images/hero.jpg` — foto de stock libre de derechos (Pexels, uso comercial libre), no es
-  una foto del sitio original.
+- `images/demo.webp` — la misma foto de demostración del ejercicio (con la flecha "solo hay
+  que activar esta zona") del sitio original. Es un gráfico instructivo genérico, no una foto
+  personal de nadie, así que se reusó tal cual.
+- `images/hero.jpg` — foto de stock libre de derechos (Pexels, uso comercial libre) para la
+  página de venta; no es una foto del sitio original.
 
 ## Correr en local
 
