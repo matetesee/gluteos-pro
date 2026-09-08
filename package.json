@@ -1,0 +1,13 @@
+{
+  "name": "gluteos-pro",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Quiz funnel Glúteos Pro — reconstruido a partir del ángulo de mercado de gluteosappbrazil.site, con marca, coach y tracking propios",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

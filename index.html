@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Glúteos Pro — Tu Plan Personalizado de 28 Días</title>
+<meta name="description" content="Descubrí tu plan personalizado para glúteos. Resultados visibles en 28 días, 8 minutos por día, sin gimnasio.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23FF2D87'/%3E%3Ctext x='50' y='70' font-size='58' text-anchor='middle'%3E%F0%9F%8D%91%3C/text%3E%3C/svg%3E">
+<style>
+  /* Fondo de página claro (igual al original) para que no se vean bordes
+     oscuros alrededor de la tarjeta del quiz en pantallas anchas (PC). */
+  html,body{margin:0;background:#0F0710;min-height:100%}
+</style>
+<!--
+  Meta Pixel: todavía no conectado (placeholder).
+  Cuando tengas el Pixel ID, pegá acá el snippet estándar de Meta
+  (fbq init + PageView) y agregá META_PIXEL_ID + META_ACCESS_TOKEN en
+  Railway → Variables para activar también el envío server-side en server.js.
+-->
+<!--
+  Utmify: todavía no conectado. El snippet de calistenia-pro traía un blob
+  ofuscado (base64+XOR) con la cuenta de Utmify de ESE proyecto — no lo
+  copiamos acá porque no podemos verificar a qué cuenta apunta. Cuando
+  tengan su cuenta de Utmify para esta marca, pegá el snippet oficial
+  (sin ofuscar) que te da el dashboard de Utmify, acá mismo en el <head>.
+-->
+</head>
+<body>
+
+<!-- ============================================================= -->
+<!--  GLÚTEOS PRO · Quiz funnel de venta                            -->
+<!--  Reconstruido con el ángulo de mercado de gluteosappbrazil.site -->
+<!--  (mismo flujo de 13 preguntas, misma oferta), sobre el mismo    -->
+<!--  motor config-driven de quiz-funnel-builder usado en            -->
+<!--  calistenia-pro. Marca, coach y tracking propios — no se reusa  -->
+<!--  el nombre/foto/credenciales del "Coach Luca" del sitio         -->
+<!--  original, ni las fotos de antes/después de personas reales     -->
+<!--  que aparecían ahí (ver README.md).                             -->
+<!-- ============================================================= -->
+
+<div id="sp">
+  <main class="sp-stage" id="spStage"></main>
+  <button class="sp-back-link" id="spBack">‹ Anterior</button>
+</div>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+#sp,#sp *{box-sizing:border-box;margin:0;padding:0}
+#sp{
+  --bg:#140A15; --bg2:#1B0F1D; --card:#1D0F1F; --card2:#231226; --line:rgba(255,255,255,.10);
+  --ink:#FFFFFF; --soft:#B9A6BC;
+  --bronze:#E0157A; --bronze2:#FF2D87; --crimson:#7C3AED; --crimson2:#9333EA;
+  --shadow:0 12px 34px rgba(0,0,0,.5);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(600px 400px at 50% -8%, rgba(255,45,135,.14), transparent 60%),
+    #140A15;
+  max-width:520px; margin:0 auto; min-height:84vh; position:relative;
+  border-radius:18px; overflow:hidden; -webkit-font-smoothing:antialiased;
+}
+#sp h1,#sp h2{font-family:'Oswald',sans-serif;font-weight:700;line-height:1.12;text-transform:uppercase;letter-spacing:.01em}
+#sp .cz{font-family:'Oswald',sans-serif}
+
+/* badge (paso 1) + meta de cuestionario (pasos 2+) */
+#sp .sp-badge{display:flex;align-items:center;gap:8px;width:max-content;margin:0 auto 18px;padding:6px 14px;background:rgba(92,122,92,.10);border:1px solid rgba(92,122,92,.25);border-radius:20px;font-family:'Oswald';font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze2)}
+#sp .sp-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--bronze2);box-shadow:0 0 8px var(--bronze2);animation:spDot 1.6s ease-in-out infinite}
+@keyframes spDot{0%,100%{opacity:1}50%{opacity:.35}}
+#sp .sp-meta{margin-bottom:20px}
+#sp .sp-meta-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:8px}
+#sp .sp-meta-tag{display:block;font-family:'Oswald';font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze2);opacity:.8;margin-bottom:3px}
+#sp .sp-meta-q{font-family:'Oswald';font-weight:700;font-style:italic;font-size:19px;color:var(--ink);letter-spacing:-.01em}
+#sp .sp-meta-pct{font-family:monospace;font-size:12px;font-weight:700;color:var(--bronze2);background:rgba(92,122,92,.10);padding:3px 8px;border-radius:6px;height:max-content}
+#sp .sp-meta-bar{height:5px;background:rgba(255,255,255,.06);border-radius:8px;overflow:hidden}
+#sp .sp-meta-fill{height:100%;background:var(--bronze2);box-shadow:0 0 10px var(--bronze2);transition:width .5s cubic-bezier(.4,0,.2,1)}
+
+#sp .sp-back-link{display:block;width:max-content;margin:16px auto 24px;background:none;border:none;color:var(--soft);font-family:'Oswald';font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s;padding:6px 10px}
+#sp .sp-back-link.show{opacity:.65;pointer-events:auto}
+#sp .sp-back-link:hover{opacity:1}
+
+#sp .sp-stage{padding:26px 18px 4px;animation:spIn .4s cubic-bezier(.2,.7,.2,1)}
+@keyframes spIn{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+#sp::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;mix-blend-mode:overlay;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0 1px,transparent 1px 3px);z-index:0}
+
+/* headings */
+#sp .sp-h{font-size:27px;text-align:center;margin-bottom:6px;line-height:1.14}
+#sp .sp-h .am{color:var(--bronze2)}
+#sp .sp-sub{text-align:center;color:var(--soft);font-size:14.5px;margin-bottom:22px}
+
+/* option cards */
+#sp .sp-grid{display:grid;gap:12px}
+#sp .sp-grid.cols2{grid-template-columns:1fr 1fr}
+#sp .sp-card{background:rgba(255,255,255,.04);border:1.5px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;transition:transform .18s,border-color .18s,box-shadow .18s;text-align:left;position:relative}
+#sp .sp-card:hover{transform:translateY(-3px);border-color:rgba(92,122,92,.5)}
+#sp .sp-card:active{transform:scale(.98)}
+#sp .sp-card.sel{border-color:var(--bronze2);box-shadow:0 0 0 2px var(--bronze2),0 0 22px rgba(92,122,92,.35);transform:translateY(-2px)}
+#sp .sp-thumb{width:100%;aspect-ratio:1/1;background:linear-gradient(150deg,#1c1c1c,#101010);display:flex;align-items:center;justify-content:center;color:#555;font-size:12px;text-align:center;padding:8px;font-weight:600}
+#sp .sp-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+#sp .sp-card.row{display:flex;align-items:center;gap:0;padding:0}
+#sp .sp-label{padding:13px 15px;font-weight:700;font-size:15.5px}
+#sp .sp-cap{display:block;font-weight:500;font-size:12.5px;color:var(--soft);margin-top:2px}
+#sp .sp-card.row .sp-label{padding:17px 16px}
+#sp .sp-arrow{margin-left:auto;margin-right:16px;color:var(--bronze);font-size:24px;font-weight:700;line-height:1}
+#sp .sp-check{margin-left:auto;margin-right:15px;width:25px;height:25px;border-radius:50%;border:2px solid var(--line);flex:none;display:flex;align-items:center;justify-content:center;font-size:13px;color:#120F0A;transition:.15s}
+#sp .sp-card.sel .sp-check{background:var(--bronze2);border-color:var(--bronze2);transform:scale(1.08)}
+
+/* buttons */
+#sp .sp-cta{display:block;width:100%;margin-top:22px;padding:17px;border:none;border-radius:13px;font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:16px;color:#fff;cursor:pointer;background:var(--bronze2);box-shadow:0 10px 26px rgba(92,122,92,.32);transition:transform .15s,filter .2s;text-align:center;text-decoration:none;position:relative;overflow:hidden}
+#sp .sp-cta::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);animation:spShine 3.2s infinite}
+@keyframes spShine{0%{left:-60%}55%,100%{left:130%}}
+#sp .sp-cta:hover{transform:translateY(-2px);filter:brightness(1.05)}
+#sp .sp-cta:disabled{opacity:.35;cursor:not-allowed;transform:none}
+#sp .sp-cta:disabled::after{display:none}
+
+/* inputs */
+#sp .sp-input{width:100%;padding:17px;font-size:18px;text-align:center;font-family:inherit;color:var(--ink);background:var(--bg2);border:1.5px solid var(--line);border-radius:13px;outline:none}
+#sp .sp-input:focus{border-color:var(--bronze2);box-shadow:0 0 0 3px rgba(92,122,92,.18)}
+#sp .sp-input::placeholder{color:#666}
+
+/* interstitial / empathy */
+#sp .sp-inter{text-align:center;padding:14px 0}
+#sp .sp-icon{width:80px;height:80px;border-radius:50%;margin:6px auto 18px;display:flex;align-items:center;justify-content:center;font-size:36px;background:radial-gradient(circle at 35% 30%,#1c1c1c,#101010);border:1.5px solid var(--bronze);box-shadow:0 0 26px rgba(92,122,92,.25)}
+#sp .sp-inter h1{font-size:25px;margin-bottom:12px}
+#sp .sp-inter h1 .am{color:var(--bronze2)}
+#sp .sp-inter p{color:var(--soft);font-size:15px;line-height:1.6;max-width:410px;margin:0 auto}
+#sp .sp-quote{font-family:'Oswald';font-style:italic;color:var(--bronze2);font-size:15px;margin:14px auto 0;max-width:360px;opacity:.9}
+#sp .sp-empathy{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--crimson2);border-radius:12px;padding:16px 18px;margin-top:18px;text-align:left;animation:spIn .35s}
+#sp .sp-empathy b{color:var(--crimson2);display:block;margin-bottom:5px;font-family:'Oswald';text-transform:uppercase;font-size:14px;letter-spacing:.03em}
+#sp .sp-empathy p{color:var(--soft);font-size:13.5px;line-height:1.55;margin:0}
+
+/* result + loader */
+#sp .sp-result{text-align:center}
+#sp .sp-vs{display:flex;gap:12px;margin:20px 0}
+#sp .sp-vs > div{flex:1;background:linear-gradient(165deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:14px;padding:18px 10px}
+#sp .sp-vs .tag{font-family:'Oswald';text-transform:uppercase;font-size:12px;letter-spacing:.06em;color:var(--soft)}
+#sp .sp-vs .big{font-family:'Oswald';font-weight:800;font-size:30px;margin:8px 0 2px}
+#sp .sp-vs.now .big{color:var(--crimson2)} #sp .sp-vs.goal .big{color:var(--bronze2)}
+#sp .sp-score{font-family:'Oswald';font-weight:800;font-size:58px;color:var(--bronze2);line-height:1;margin:8px 0;text-shadow:0 0 26px rgba(92,122,92,.3)}
+#sp .sp-vsbox{display:flex;gap:12px;margin:18px 0}
+#sp .sp-vsbox > div{flex:1;background:linear-gradient(165deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:14px;padding:15px 10px;text-align:center}
+#sp .sp-vsbox .lab{font-family:'Oswald';text-transform:uppercase;font-size:11px;letter-spacing:.06em;color:var(--soft)}
+#sp .sp-vsbox .v{font-family:'Oswald';font-weight:800;font-size:21px;margin-top:5px}
+#sp .sp-vsbox.wrap{gap:12px}
+#sp .sp-vsbox .nowb .v{color:var(--crimson2)} #sp .sp-vsbox .goalb .v{color:var(--bronze2)}
+#sp .sp-metric{margin:14px 0;text-align:left}
+#sp .sp-metric .ml{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:7px;color:var(--soft);font-weight:600}
+#sp .sp-track2{height:14px;background:#241B10;border-radius:8px;overflow:hidden}
+#sp .sp-fill2{height:100%;width:0;border-radius:8px;transition:width 1.3s cubic-bezier(.2,.7,.2,1)}
+#sp .sp-fill2.now{background:linear-gradient(90deg,#7a2a22,var(--crimson2))}
+#sp .sp-fill2.goal{background:linear-gradient(90deg,var(--bronze),var(--bronze2));box-shadow:0 0 14px rgba(92,122,92,.4)}
+#sp .sp-attack{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--bronze);border-radius:12px;padding:15px 16px;margin:18px 0;text-align:left}
+#sp .sp-attack b{font-family:'Oswald';text-transform:uppercase;color:var(--bronze2);font-size:13px;display:block;margin-bottom:9px;letter-spacing:.03em}
+#sp .sp-attack .z{display:flex;align-items:center;gap:9px;font-size:14.5px;margin:6px 0;opacity:0;transform:translateX(-10px);transition:opacity .4s,transform .4s}
+#sp .sp-attack .z.in{opacity:1;transform:none}
+#sp .sp-attack .z .ck{color:var(--bronze2);font-weight:800}
+#sp .sp-loader{text-align:center;padding:34px 0}
+#sp .sp-forge{font-size:42px;animation:spPulse 1s ease-in-out infinite}
+@keyframes spPulse{0%,100%{transform:scale(1);filter:drop-shadow(0 0 0 rgba(92,122,92,0))}50%{transform:scale(1.12);filter:drop-shadow(0 0 14px rgba(92,122,92,.6))}}
+#sp .sp-ring{font-family:'Oswald';font-weight:800;font-size:44px;color:var(--bronze2);margin-top:10px}
+#sp .sp-ltrack{height:9px;background:#241B10;border-radius:6px;overflow:hidden;margin:18px 0}
+#sp .sp-lfill{height:100%;width:0;background:linear-gradient(90deg,var(--crimson),var(--bronze2));transition:width .25s}
+
+/* SALES */
+#sp .sp-timer{position:sticky;top:0;z-index:5;background:linear-gradient(90deg,var(--crimson),var(--crimson2));color:#fff;text-align:center;padding:11px;font-family:'Oswald';font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:14px}
+#sp .sp-timer span{font-family:'Oswald';font-weight:800;margin-left:6px}
+#sp .sp-salebody{padding:26px 18px 42px}
+#sp .sp-hero-img{width:100%;aspect-ratio:16/10;border-radius:14px;overflow:hidden;background:linear-gradient(150deg,#1c1c1c,#101010);display:flex;align-items:center;justify-content:center;color:#555;font-size:13px;margin:14px 0;border:1px solid var(--line)}
+#sp .sp-hero-img img{width:100%;height:100%;object-fit:cover}
+#sp .sp-won{background:linear-gradient(140deg,#161816,#111311);border:1px solid var(--bronze);border-radius:12px;padding:14px;text-align:center;margin-bottom:8px;box-shadow:0 0 22px rgba(92,122,92,.15)}
+#sp .sp-won b{font-family:'Oswald';font-weight:800;color:var(--bronze2)}
+#sp .sp-sec{margin:26px 0}
+#sp .sp-sec-h{font-family:'Oswald';font-weight:800;text-transform:uppercase;font-size:20px;text-align:center;margin-bottom:16px;letter-spacing:.02em}
+#sp .sp-sec-h .am{color:var(--bronze2)}
+#sp .sp-incl{list-style:none;display:grid;gap:10px}
+#sp .sp-incl li{display:flex;gap:11px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:13px 15px;font-size:14px}
+#sp .sp-incl li .ck{color:var(--bronze2);font-weight:800;flex:none}
+#sp .sp-how{display:grid;gap:13px}
+#sp .sp-how .st{display:flex;gap:13px;align-items:flex-start}
+#sp .sp-how .num{width:40px;height:40px;flex:none;border-radius:50%;background:linear-gradient(140deg,var(--bronze2),var(--bronze));color:#0f120f;font-family:'Oswald';font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center}
+#sp .sp-how .st b{font-family:'Oswald';text-transform:uppercase;font-size:15.5px;display:block;margin-bottom:2px}
+#sp .sp-how .st p{color:var(--soft);font-size:13.5px;margin:0;line-height:1.45}
+#sp .sp-tst{display:grid;gap:12px}
+#sp .sp-tst .c{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+#sp .sp-tst .stars{color:var(--bronze2);font-size:13px;letter-spacing:2px}
+#sp .sp-tst .q{font-size:13.5px;line-height:1.55;margin:6px 0 8px}
+#sp .sp-tst .who{display:flex;justify-content:space-between;font-size:12.5px}
+#sp .sp-tst .who b{font-family:'Oswald';text-transform:uppercase}
+#sp .sp-tst .who .res{color:var(--bronze2);font-weight:700}
+#sp .sp-tier{display:block;width:100%;text-align:left;background:linear-gradient(165deg,var(--card2),var(--card));border:1.5px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px;cursor:pointer;position:relative;transition:border-color .15s,box-shadow .15s}
+#sp .sp-tier.sel{border-color:var(--bronze2);box-shadow:0 0 0 2px var(--bronze2),0 0 18px rgba(92,122,92,.22)}
+#sp .sp-tier.pop{border-color:var(--bronze)}
+#sp .sp-pop{position:absolute;top:-11px;left:16px;background:linear-gradient(140deg,var(--crimson2),var(--crimson));color:#fff;font-family:'Oswald';font-weight:700;text-transform:uppercase;font-size:11px;letter-spacing:.05em;padding:3px 11px;border-radius:20px}
+#sp .sp-tier-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+#sp .sp-tier-name{font-family:'Oswald';font-weight:700;text-transform:uppercase;font-size:16px}
+#sp .sp-tier-old{color:var(--soft);text-decoration:line-through;font-size:13px;margin-right:6px}
+#sp .sp-tier-now{font-weight:700;font-size:15px}
+#sp .sp-off{display:inline-block;background:var(--crimson);color:#fff;font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px;margin-top:5px}
+#sp .sp-perday{text-align:right;flex:none}
+#sp .sp-perday .pd{font-family:'Oswald';font-weight:800;font-size:25px;line-height:1;color:var(--bronze2)}
+#sp .sp-perday .u{font-size:11px;color:var(--soft)}
+#sp .sp-radio{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);flex:none;margin-right:12px;display:inline-block;vertical-align:middle}
+#sp .sp-tier.sel .sp-radio{border-color:var(--bronze2);background:radial-gradient(circle,var(--bronze2) 40%,transparent 46%)}
+#sp .sp-bonus{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--bronze2);font-weight:600}
+#sp .sp-guar{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin:18px 0;font-size:13px;color:var(--soft)}
+#sp .sp-guar .g-ic{font-size:26px}
+#sp .sp-proof{text-align:center;color:var(--soft);font-size:13px;margin-top:14px}
+#sp .sp-proof b{color:var(--ink)}
+#sp .sp-faq .it{border-bottom:1px solid var(--line)}
+#sp .sp-faq .q{width:100%;text-align:left;background:none;border:none;color:var(--ink);font-family:'Oswald';text-transform:uppercase;font-size:14.5px;font-weight:600;padding:15px 28px 15px 0;cursor:pointer;position:relative}
+#sp .sp-faq .q::after{content:'+';position:absolute;right:4px;top:13px;font-size:20px;color:var(--bronze2)}
+#sp .sp-faq .it.open .q::after{content:'–'}
+#sp .sp-faq .a{max-height:0;overflow:hidden;transition:max-height .25s ease;color:var(--soft);font-size:13.5px;line-height:1.55}
+#sp .sp-faq .it.open .a{max-height:260px;padding-bottom:14px}
+#sp .sp-disc{font-size:10.5px;color:#666;text-align:center;margin-top:18px;line-height:1.5}
+#sp .sp-auth{text-align:center;margin:24px 0}
+#sp .sp-laurel{font-family:'Oswald';font-weight:800;font-size:36px;color:var(--bronze2);display:flex;align-items:center;justify-content:center;gap:10px}
+#sp .sp-laurel .lf{opacity:.85;font-size:30px}
+#sp .sp-auth-sub{color:var(--soft);font-size:13px;margin-top:2px}
+#sp .sp-stars{font-size:18px;color:var(--bronze2);margin-top:14px;letter-spacing:2px}
+#sp .sp-stars b{color:var(--ink);font-family:'Oswald'}
+#sp .sp-pay{text-align:center;margin:14px 0 4px}
+#sp .sp-pay > span{font-size:12px;color:var(--soft);display:block;margin-bottom:8px}
+#sp .sp-cards{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+#sp .sp-cards span{background:var(--card);border:1px solid var(--line);border-radius:7px;padding:6px 12px;font-family:'Oswald';font-weight:600;font-size:11.5px;letter-spacing:.03em;color:var(--ink)}
+@media(max-width:430px){#sp .sp-grid.cols2{grid-template-columns:1fr}}
+</style>
+
+<!-- ===== Componentes (slider / proyección / medidor) ===== -->
+<style>
+#sp .sp-sl-wrap{display:flex;flex-direction:column;align-items:center;width:100%;padding:12px 0;box-sizing:border-box;user-select:none;-webkit-user-select:none}
+#sp .sp-sl-val{font-family:'Oswald',sans-serif;font-size:2.6rem;font-weight:700;color:var(--ink);letter-spacing:.02em;margin-bottom:18px;line-height:1}
+#sp .sp-sl-track-wrap{position:relative;width:100%;height:44px;display:flex;align-items:center;cursor:pointer}
+#sp .sp-sl-track{position:absolute;left:0;right:0;height:6px;border-radius:3px;background:var(--line);overflow:visible}
+#sp .sp-sl-fill{position:absolute;left:0;top:0;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--bronze),var(--bronze2));pointer-events:none}
+#sp .sp-sl-ticks{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);pointer-events:none}
+#sp .sp-sl-tick{position:absolute;width:2px;height:10px;background:var(--line);border-radius:1px;transform:translate(-50%,-50%)}
+#sp .sp-sl-tick.sp-sl-tick-filled{background:var(--bronze2);opacity:.5}
+#sp .sp-sl-thumb{position:absolute;top:50%;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--bronze),var(--bronze2));box-shadow:0 0 0 3px var(--card),0 0 0 5px var(--bronze),0 4px 16px rgba(92,122,92,.45);transform:translate(-50%,-50%);transition:box-shadow .15s;cursor:grab;z-index:2}
+#sp .sp-sl-thumb:active{cursor:grabbing;box-shadow:0 0 0 3px var(--card),0 0 0 6px var(--bronze2),0 6px 24px rgba(92,122,92,.6)}
+#sp .sp-pj-wrap{font-family:inherit;width:100%;box-sizing:border-box;padding:0 0 8px}
+#sp .sp-pj-headline{color:var(--ink);font-size:1.1rem;font-weight:700;text-align:center;margin:0 0 12px;letter-spacing:.01em}
+#sp .sp-pj-svg{width:100%;display:block;overflow:visible}
+#sp .sp-pj-axis-label{fill:var(--soft);font-size:11px;font-family:inherit}
+#sp .sp-pj-weight-label{font-size:13px;font-weight:700;font-family:inherit}
+#sp .sp-pj-dot{animation:sp-pj-pulse 1.8s ease-in-out infinite}
+@keyframes sp-pj-pulse{0%,100%{opacity:1;r:5}50%{opacity:.5;r:8}}
+#sp .sp-gg-wrap{display:flex;flex-direction:column;align-items:center;gap:4px;width:100%}
+#sp .sp-gg-label{font-family:'Oswald',sans-serif;font-size:.85rem;color:var(--soft);letter-spacing:.08em;text-transform:uppercase;text-align:center}
+#sp .sp-gg-svg{width:100%;max-width:280px;display:block;margin:0 auto;overflow:visible}
+#sp .sp-gg-value{font-family:'Oswald',sans-serif;font-size:2.4rem;font-weight:700;color:var(--ink);line-height:1;text-align:center;margin-top:-18px}
+#sp .sp-gg-sublabel{font-size:.75rem;color:var(--soft);letter-spacing:.06em;text-align:center;margin-top:2px}
+
+/* ===== Regla/cinta métrica (altura, peso) ===== */
+#sp .sp-rl-wrap{display:flex;flex-direction:column;align-items:center;width:100%;padding:6px 0 2px;user-select:none;-webkit-user-select:none}
+#sp .sp-rl-val{font-family:'Oswald',sans-serif;font-size:3rem;font-weight:800;color:var(--ink);margin-bottom:10px;text-shadow:0 0 22px rgba(255,255,255,.2);line-height:1}
+#sp .sp-rl-val .u{font-size:1.05rem;font-weight:700;color:var(--bronze2);margin-left:5px;text-shadow:none;text-transform:uppercase}
+#sp .sp-rl-center{width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;position:relative;z-index:2}
+#sp .sp-rl-center.top{border-top:9px solid var(--bronze2);filter:drop-shadow(0 0 6px rgba(92,122,92,.7))}
+#sp .sp-rl-center.bot{border-bottom:9px solid var(--bronze2);filter:drop-shadow(0 0 6px rgba(92,122,92,.7))}
+#sp .sp-rl-track{position:relative;width:100%;height:92px;overflow:hidden;background:rgba(255,255,255,.03);border-radius:10px;cursor:grab}
+#sp .sp-rl-track:active{cursor:grabbing}
+#sp .sp-rl-inner{position:absolute;top:0;left:0;height:100%;will-change:transform}
+#sp .sp-rl-tick{position:absolute;top:0;left:0;height:100%}
+#sp .sp-rl-line{position:absolute;top:10px;left:-.5px;width:1px;height:22px;background:rgba(255,255,255,.14);border-radius:1px}
+#sp .sp-rl-line.mid{width:2px;height:36px;left:-1px;background:rgba(255,255,255,.3)}
+#sp .sp-rl-line.major{width:3px;height:54px;left:-1.5px;background:var(--ink)}
+#sp .sp-rl-label{position:absolute;top:66px;left:0;transform:translateX(-50%);font-size:10.5px;font-weight:700;color:var(--soft);font-family:monospace;white-space:nowrap}
+#sp .sp-rl-hint{margin-top:12px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft);opacity:.65}
+
+/* ===== Loader tipo checklist ===== */
+#sp .sp-loader2{text-align:center}
+#sp .sp-lc-status{display:flex;justify-content:space-between;font-family:monospace;font-size:11px;text-transform:uppercase;color:var(--soft);margin:20px 0 8px;letter-spacing:.04em}
+#sp .sp-lc-status b{color:var(--bronze2)}
+#sp .sp-lc-list{display:grid;gap:10px;margin-top:24px;text-align:left}
+#sp .sp-lc-row{display:flex;align-items:center;gap:12px;padding:14px 16px;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:11px;opacity:.45;transition:opacity .3s,border-color .3s}
+#sp .sp-lc-row.active{opacity:1;border-color:rgba(92,122,92,.45)}
+#sp .sp-lc-row.done{opacity:.8}
+#sp .sp-lc-ic{width:18px;flex:none;text-align:center;color:var(--bronze2);font-weight:700}
+#sp .sp-lc-label{font-family:'Oswald';font-size:12.5px;letter-spacing:.03em;font-weight:600}
+#sp .sp-lc-sub{display:block;font-family:monospace;font-size:10.5px;color:var(--soft);margin-top:2px;font-weight:400;letter-spacing:0}
+#sp .sp-lc-footer{margin-top:24px;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--soft);opacity:.5}
+
+/* ===== Recluta Aprobado + gate de video ===== */
+#sp .sp-report{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:14px;padding:16px;margin:20px 0;text-align:left}
+#sp .sp-report-top{display:flex;justify-content:space-between;font-family:monospace;font-size:11px;color:var(--soft);text-transform:uppercase;letter-spacing:.05em;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+#sp .sp-report-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px}
+#sp .sp-report-row:last-child{margin-bottom:0}
+#sp .sp-report-row .ic{width:36px;height:36px;flex:none;border-radius:50%;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-size:16px}
+#sp .sp-report-row b{display:block;font-size:14px;margin-bottom:2px}
+#sp .sp-report-row p{color:var(--soft);font-size:12.5px;line-height:1.4;margin:0}
+#sp .sp-video-box{aspect-ratio:9/14;max-height:380px;margin:16px auto 0;background:rgba(255,255,255,.03);border:1px dashed var(--line);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:34px;color:var(--soft);gap:10px;text-align:center;padding:20px}
+#sp .sp-video-box span{font-size:12px;letter-spacing:.04em;max-width:220px;line-height:1.4}
+</style>
+
+<script>
+function spSlider(opts){
+  var o=Object.assign({min:0,max:100,value:50,step:1,unit:'',accent:null},opts);
+  var cur=Math.min(o.max,Math.max(o.min,o.value));
+  var wrap=document.createElement('div');wrap.className='sp-sl-wrap';wrap.setAttribute('tabindex','0');
+  var val=document.createElement('div');val.className='sp-sl-val';
+  var tw=document.createElement('div');tw.className='sp-sl-track-wrap';
+  var track=document.createElement('div');track.className='sp-sl-track';
+  var fill=document.createElement('div');fill.className='sp-sl-fill';
+  var ticks=document.createElement('div');ticks.className='sp-sl-ticks';
+  var thumb=document.createElement('div');thumb.className='sp-sl-thumb';
+  var steps=Math.round((o.max-o.min)/o.step);
+  var maxTicks=20;var tickEvery=Math.max(1,Math.ceil(steps/maxTicks));
+  for(var i=0;i<=steps;i+=tickEvery){
+    var t=document.createElement('div');t.className='sp-sl-tick';
+    t.style.left=(i/steps*100)+'%';ticks.appendChild(t);
+  }
+  track.appendChild(fill);track.appendChild(ticks);track.appendChild(thumb);tw.appendChild(track);
+  wrap.appendChild(val);wrap.appendChild(tw);
+  function pct(){return(cur-o.min)/(o.max-o.min)}
+  function render(){
+    val.textContent=cur+(o.unit?' '+o.unit:'');
+    var p=pct()*100;fill.style.width=p+'%';thumb.style.left=p+'%';
+    var ts=ticks.querySelectorAll('.sp-sl-tick');var fi=pct()*steps/tickEvery;
+    ts.forEach(function(t,i){t.classList.toggle('sp-sl-tick-filled',i<=fi);});
+  }
+  function snap(v){return Math.round((v-o.min)/o.step)*o.step+o.min}
+  function clamp(v){return Math.min(o.max,Math.max(o.min,v))}
+  function fromX(x){var r=track.getBoundingClientRect();return clamp(snap((x-r.left)/r.width*(o.max-o.min)+o.min));}
+  function set(v){if(v===cur)return;cur=v;render();navigator.vibrate&&navigator.vibrate(8);}
+  var drag=false;
+  function onMove(x){if(drag){set(fromX(x));}}
+  thumb.addEventListener('mousedown',function(e){drag=true;e.preventDefault();});
+  document.addEventListener('mousemove',function(e){onMove(e.clientX);});
+  document.addEventListener('mouseup',function(){drag=false;});
+  thumb.addEventListener('touchstart',function(e){drag=true;e.preventDefault();},{passive:false});
+  document.addEventListener('touchmove',function(e){if(drag){onMove(e.touches[0].clientX);}},{passive:true});
+  document.addEventListener('touchend',function(){drag=false;});
+  tw.addEventListener('click',function(e){if(e.target===thumb)return;set(fromX(e.clientX));});
+  wrap.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='ArrowUp'){set(clamp(snap(cur+o.step)));e.preventDefault();}
+    else if(e.key==='ArrowLeft'||e.key==='ArrowDown'){set(clamp(snap(cur-o.step)));e.preventDefault();}
+  });
+  wrap.getValue=function(){return cur;};
+  render();return wrap;
+}
+// Slider tipo "cinta métrica/regla": el centro queda fijo (marcado por los
+// dos triángulos) y la tira de marcas se desliza por debajo al arrastrar,
+// igual que el selector de altura/peso del funnel original.
+function spRuler(opts){
+  var o=Object.assign({min:0,max:100,value:50,step:1,unit:''},opts);
+  var cur=Math.min(o.max,Math.max(o.min,o.value));
+  var PX=40; // px por unidad, igual al original
+  var wrap=document.createElement('div');wrap.className='sp-rl-wrap';wrap.setAttribute('tabindex','0');
+  var val=document.createElement('div');val.className='sp-rl-val';
+  var capTop=document.createElement('div');capTop.className='sp-rl-center top';
+  var track=document.createElement('div');track.className='sp-rl-track';
+  var inner=document.createElement('div');inner.className='sp-rl-inner';
+  var capBot=document.createElement('div');capBot.className='sp-rl-center bot';
+  var hint=document.createElement('div');hint.className='sp-rl-hint';hint.textContent='Arrastra para ajustar';
+  var n=Math.round((o.max-o.min)/o.step);
+  for(var i=0;i<=n;i++){
+    var v=o.min+i*o.step;
+    var t=document.createElement('div');t.className='sp-rl-tick';t.style.left=(i*PX)+'px';
+    var major=(Math.round(v)%10===0), mid=(Math.round(v)%5===0);
+    var line=document.createElement('div');line.className='sp-rl-line'+(major?' major':mid?' mid':'');
+    t.appendChild(line);
+    if(major){ var lab=document.createElement('div');lab.className='sp-rl-label';lab.textContent=Math.round(v);t.appendChild(lab); }
+    inner.appendChild(t);
+  }
+  track.appendChild(inner);
+  wrap.appendChild(val);wrap.appendChild(capTop);wrap.appendChild(track);wrap.appendChild(capBot);wrap.appendChild(hint);
+  function render(){
+    val.innerHTML=cur+'<span class="u">'+(o.unit||'')+'</span>';
+    var offset=(cur-o.min)*PX;
+    // OJO: "50%" en translateX() se calcula sobre el ancho del propio elemento
+    // (que es enorme, son todas las marcas), no del track visible. Por eso
+    // medimos el ancho REAL del track en px y centramos con eso.
+    var half=track.clientWidth/2;
+    inner.style.transform='translateX('+(half-offset)+'px)';
+  }
+  function clampSnap(v){ v=Math.round((v-o.min)/o.step)*o.step+o.min; return Math.min(o.max,Math.max(o.min,v)); }
+  var dragging=false,startX=0,startVal=0,lastVal=cur;
+  function pos(e){ return e.touches?e.touches[0].clientX:e.clientX; }
+  function onDown(e){ dragging=true; startX=pos(e); startVal=cur; }
+  function onMove(e){ if(!dragging)return; var dx=pos(e)-startX; var v=clampSnap(startVal-dx/PX*o.step);
+    if(v!==lastVal){ lastVal=v; navigator.vibrate&&navigator.vibrate(6); } cur=v; render(); }
+  function onUp(){ dragging=false; }
+  track.addEventListener('mousedown',function(e){onDown(e);e.preventDefault();});
+  document.addEventListener('mousemove',onMove);
+  document.addEventListener('mouseup',onUp);
+  track.addEventListener('touchstart',function(e){onDown(e);},{passive:true});
+  document.addEventListener('touchmove',onMove,{passive:true});
+  document.addEventListener('touchend',onUp);
+  wrap.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='ArrowUp'){cur=clampSnap(cur+o.step);render();e.preventDefault();}
+    else if(e.key==='ArrowLeft'||e.key==='ArrowDown'){cur=clampSnap(cur-o.step);render();e.preventDefault();}
+  });
+  wrap.getValue=function(){return cur;};
+  // El track todavía no tiene ancho real (no está montado en el DOM) en el
+  // primer render(); se corrige apenas se monta, vía requestAnimationFrame.
+  wrap.refresh=render;
+  render();return wrap;
+}
+function spProjection(opts){
+  var fromKg=opts.fromKg,toKg=opts.toKg,weeks=opts.weeks||12,unit=opts.unit||'kg',
+      name=(opts.name&&opts.name.trim())||'Recluta',label=opts.targetDateLabel||'Meta';
+  var wrap=document.createElement('div');wrap.className='sp-pj-wrap';
+  var h=document.createElement('p');h.className='sp-pj-headline';h.textContent=name+', este es tu camino';wrap.appendChild(h);
+  var NS='http://www.w3.org/2000/svg',W=320,H=160,PL=44,PR=24,PT=18,PB=32;
+  var svg=document.createElementNS(NS,'svg');svg.setAttribute('viewBox','0 0 '+W+' '+H);svg.setAttribute('preserveAspectRatio','xMidYMid meet');svg.setAttribute('class','sp-pj-svg');
+  var defs=document.createElementNS(NS,'defs');
+  var lg=document.createElementNS(NS,'linearGradient');lg.setAttribute('id','sp-pj-lg');lg.setAttribute('x1','0%');lg.setAttribute('y1','0%');lg.setAttribute('x2','100%');lg.setAttribute('y2','0%');
+  var s1=document.createElementNS(NS,'stop');s1.setAttribute('offset','0%');s1.setAttribute('stop-color','#B4362C');
+  var s2=document.createElementNS(NS,'stop');s2.setAttribute('offset','100%');s2.setAttribute('stop-color','#5FA648');
+  lg.appendChild(s1);lg.appendChild(s2);
+  var ag=document.createElementNS(NS,'linearGradient');ag.setAttribute('id','sp-pj-ag');ag.setAttribute('x1','0%');ag.setAttribute('y1','0%');ag.setAttribute('x2','0%');ag.setAttribute('y2','100%');
+  var a1=document.createElementNS(NS,'stop');a1.setAttribute('offset','0%');a1.setAttribute('stop-color','#B4362C');a1.setAttribute('stop-opacity','0.28');
+  var a2=document.createElementNS(NS,'stop');a2.setAttribute('offset','100%');a2.setAttribute('stop-color','#5FA648');a2.setAttribute('stop-opacity','0');
+  ag.appendChild(a1);ag.appendChild(a2);
+  defs.appendChild(lg);defs.appendChild(ag);svg.appendChild(defs);
+  var x0=PL,x1=W-PR,y0=PT,y1=H-PB,pts=[],N=60;
+  for(var i=0;i<=N;i++){var tt=i/N,ease=1-Math.pow(1-tt,2.4);pts.push([x0+(x1-x0)*tt,y0+(y1-y0)*ease]);}
+  var d='M'+pts[0][0]+','+pts[0][1];
+  for(var j=1;j<pts.length;j++){var px=pts[j-1],nx=pts[j],cpx=(px[0]+nx[0])/2;d+=' C'+cpx+','+px[1]+' '+cpx+','+nx[1]+' '+nx[0]+','+nx[1];}
+  var last=pts[pts.length-1];
+  var area=document.createElementNS(NS,'path');area.setAttribute('d',d+' L'+last[0]+','+y1+' L'+x0+','+y1+' Z');area.setAttribute('fill','url(#sp-pj-ag)');area.setAttribute('opacity','0');svg.appendChild(area);
+  var line=document.createElementNS(NS,'path');line.setAttribute('d',d);line.setAttribute('fill','none');line.setAttribute('stroke','url(#sp-pj-lg)');line.setAttribute('stroke-width','3');line.setAttribute('stroke-linecap','round');svg.appendChild(line);
+  var ax1=document.createElementNS(NS,'text');ax1.setAttribute('x',x0);ax1.setAttribute('y',H-6);ax1.setAttribute('text-anchor','middle');ax1.setAttribute('class','sp-pj-axis-label');ax1.textContent='Hoy';
+  var ax2=document.createElementNS(NS,'text');ax2.setAttribute('x',x1);ax2.setAttribute('y',H-6);ax2.setAttribute('text-anchor','middle');ax2.setAttribute('class','sp-pj-axis-label');ax2.textContent=label;
+  var wl1=document.createElementNS(NS,'text');wl1.setAttribute('x',x0-4);wl1.setAttribute('y',y0+4);wl1.setAttribute('text-anchor','end');wl1.setAttribute('class','sp-pj-weight-label');wl1.setAttribute('fill','#AC9F84');wl1.textContent=fromKg+unit;
+  var dlabel=document.createElementNS(NS,'text');dlabel.setAttribute('x',x1+4);dlabel.setAttribute('y',last[1]+4);dlabel.setAttribute('text-anchor','end');dlabel.setAttribute('class','sp-pj-weight-label');dlabel.setAttribute('fill','#5FA648');dlabel.setAttribute('opacity','0');dlabel.textContent=toKg+unit;
+  var dot=document.createElementNS(NS,'circle');dot.setAttribute('cx',last[0]);dot.setAttribute('cy',last[1]);dot.setAttribute('r','5');dot.setAttribute('fill','#5FA648');dot.setAttribute('class','sp-pj-dot');dot.setAttribute('opacity','0');
+  svg.appendChild(ax1);svg.appendChild(ax2);svg.appendChild(wl1);svg.appendChild(dlabel);svg.appendChild(dot);wrap.appendChild(svg);
+  function initAnim(){
+    var len=line.getTotalLength();line.setAttribute('stroke-dasharray',len);line.setAttribute('stroke-dashoffset',len);
+    var start=null,dur=1600;
+    function frame(ts){if(!start)start=ts;var p=Math.min((ts-start)/dur,1),ease=1-Math.pow(1-p,3);line.setAttribute('stroke-dashoffset',len*(1-ease));if(p<1){requestAnimationFrame(frame);}else{area.setAttribute('opacity','1');dot.setAttribute('opacity','1');dlabel.setAttribute('opacity','1');}}
+    requestAnimationFrame(frame);
+  }
+  var ob=new IntersectionObserver(function(en){if(en[0].isIntersecting){ob.disconnect();initAnim();}},{threshold:.1});ob.observe(wrap);
+  return wrap;
+}
+function spGauge(opts){
+  var value=opts.value||0,label=opts.label||'',sublabel=opts.sublabel||'';
+  var wrap=document.createElement('div');wrap.className='sp-gg-wrap';
+  var lbl=document.createElement('div');lbl.className='sp-gg-label';lbl.textContent=label;
+  var ns='http://www.w3.org/2000/svg';
+  var svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox','0 0 200 110');svg.setAttribute('class','sp-gg-svg');
+  var defs=document.createElementNS(ns,'defs');var grad=document.createElementNS(ns,'linearGradient');grad.setAttribute('id','sp-gg-grad');grad.setAttribute('x1','0%');grad.setAttribute('y1','0%');grad.setAttribute('x2','100%');grad.setAttribute('y2','0%');
+  var g1=document.createElementNS(ns,'stop');g1.setAttribute('offset','0%');g1.setAttribute('stop-color','#B4362C');var g2=document.createElementNS(ns,'stop');g2.setAttribute('offset','100%');g2.setAttribute('stop-color','#5FA648');
+  grad.appendChild(g1);grad.appendChild(g2);defs.appendChild(grad);svg.appendChild(defs);
+  var cx=100,cy=100,r=80,sw=14;
+  function arc(angle){var a=(angle-180)*Math.PI/180;return{x:cx+r*Math.cos(a),y:cy+r*Math.sin(a)};}
+  var track=document.createElementNS(ns,'path');var ts=arc(0),te=arc(180);
+  track.setAttribute('d','M'+ts.x+','+ts.y+' A'+r+','+r+' 0 0,1 '+te.x+','+te.y);track.setAttribute('fill','none');track.setAttribute('stroke','#3E3120');track.setAttribute('stroke-width',sw);track.setAttribute('stroke-linecap','round');svg.appendChild(track);
+  var arcEl=document.createElementNS(ns,'path');arcEl.setAttribute('fill','none');arcEl.setAttribute('stroke','url(#sp-gg-grad)');arcEl.setAttribute('stroke-width',sw);arcEl.setAttribute('stroke-linecap','round');svg.appendChild(arcEl);
+  var needleLen=r-4;var needle=document.createElementNS(ns,'line');needle.setAttribute('x1',cx);needle.setAttribute('y1',cy);needle.setAttribute('stroke','#F3ECDD');needle.setAttribute('stroke-width','2.5');needle.setAttribute('stroke-linecap','round');svg.appendChild(needle);
+  var dot=document.createElementNS(ns,'circle');dot.setAttribute('cx',cx);dot.setAttribute('cy',cy);dot.setAttribute('r','5');dot.setAttribute('fill','#F3ECDD');svg.appendChild(dot);
+  var valDiv=document.createElement('div');valDiv.className='sp-gg-value';valDiv.textContent='0';
+  var sub=document.createElement('div');sub.className='sp-gg-sublabel';sub.textContent=sublabel;
+  wrap.appendChild(lbl);wrap.appendChild(svg);wrap.appendChild(valDiv);wrap.appendChild(sub);
+  function update(p){var angle=p*180,end=arc(angle),lf=angle>180?1:0,start=arc(0);
+    if(p<0.002){arcEl.setAttribute('d','');}else{arcEl.setAttribute('d','M'+start.x+','+start.y+' A'+r+','+r+' 0 '+lf+',1 '+end.x+','+end.y);}
+    var na=(angle-180)*Math.PI/180;needle.setAttribute('x2',cx+needleLen*Math.cos(na));needle.setAttribute('y2',cy+needleLen*Math.sin(na));valDiv.textContent=Math.round(p*value);}
+  update(0);
+  var obs=new IntersectionObserver(function(en){if(!en[0].isIntersecting)return;obs.disconnect();var dur=1300,start=null;
+    function frame(now){if(!start)start=now;var t=Math.min((now-start)/dur,1),ease=1-Math.pow(1-t,3);update(ease);if(t<1)requestAnimationFrame(frame);else update(1);}requestAnimationFrame(frame);},{threshold:.2});
+  obs.observe(wrap);
+  return wrap;
+}
+</script>
+
+<script>
+(function(){
+/* =================== CONFIG (EDITAR ACÁ) =================== */
+var CONFIG = {
+  // ====== MARCA / BÁSICOS ======
+  BRAND: "GLÚTEOS <span class='am'>PRO</span>",
+  BRAND_PLAIN: "Glúteos Pro",
+  COACH_NAME: "Coach Bela",              // persona ficticia propia (no "Coach Luca")
+  COACH_TITLE: "Especialista en entrenamiento de glúteos",
+  STORE: "", // Checkout / tienda: completar cuando esté lista (Shopify, Stripe, etc.)
+  TIMER_MIN: 15,
+
+  // Imágenes de la oferta. Foto de stock libre de derechos (Pexels), no son
+  // las fotos del sitio original.
+  IMG: { sale_hero: "images/hero.jpg", program: "" },
+
+  // ====== PLAN (precio único, igual al funnel analizado) ======
+  // oldUsd/nowUsd son la base en USD: el precio real que ve cada visitante
+  // se convierte en vivo a su moneda local según su país (ver MONEDA LOCAL
+  // más abajo). Argentina usa un precio fijo en ARS en vez de conversión.
+  TIERS: [
+    { name:"MÉTODO GLÚTEOS PRO", oldUsd:97.00, nowUsd:9.90,
+      bonus:"🎁 +$404 en bonos incluidos gratis", variantId:"", popular:true }
+  ],
+
+  // ====== OFERTA ======
+  INCLUDES: [ "Método completo de 28 días", "Rutinas de solo 8 minutos al día", "Plan alimenticio simplificado", "Soporte directo 28 días", "Acceso vitalicio — sin mensualidades", "Garantía de devolución de 45 días" ],
+  BONUSES: [
+    { t:"El truco de activación profunda", d:"Rutina extra que ayuda a activar el glúteo y sentirlo firme desde las primeras semanas.", value:"$85" },
+    { t:"Lista de alimentos que sabotean tu progreso", d:"Qué evitar para no bloquear tu metabolismo mientras seguís el plan.", value:"$67" },
+    { t:"Guía para piel más lisa", d:"Cuidados simples para la piel de la zona mientras entrenás.", value:"$37" },
+    { t:"Soporte directo por WhatsApp", d:"Acompañamiento durante los 28 días para ajustar tu rutina.", value:"$215" }
+  ],
+  HOW: [
+    { n:"I",   t:"Diagnóstico rápido", d:"Completás el cuestionario y evaluamos tu punto de partida." },
+    { n:"II",  t:"Plan generado",      d:"Recibís tu rutina adaptada a tu edad, objetivo y tiempo disponible." },
+    { n:"III", t:"28 días, 8 minutos", d:"Lo seguís día a día, en casa, sin gimnasio ni equipamiento." }
+  ],
+  TESTIMONIALS: [
+    { name:"Caro, 27", result:"resultado en 3 semanas", text:"No tengo tiempo para gimnasio con el laburo. Con 8 minutos por día ya empecé a notar diferencia en 3 semanas, sin excusas." },
+    { name:"Meli, 34", result:"más firmeza y energía", text:"Lo que más me gustó es que no necesito equipamiento. Lo hago en mi cuarto y el plan de comidas es simple, no es una dieta estricta." }
+  ],
+  FAQ: [
+    { q:"¿Necesito equipamiento?", a:"No. El método usa solo el peso de tu cuerpo. Podés hacerlo en tu casa en apenas 8 minutos al día." },
+    { q:"¿Y si no veo resultados?", a:"Tenés 45 días de garantía. Si seguís el plan y no ves resultados visibles, te devolvemos el 100% de tu dinero." },
+    { q:"¿Sirve para principiantes?", a:"Sí. Está pensado para todos los niveles, con videos paso a paso que guían cada movimiento." },
+    { q:"¿Cómo recibo el acceso?", a:"Apenas se confirma el pago, recibís acceso directo a los entrenamientos, el plan de comidas y los bonos." }
+  ],
+
+  // ====== PASOS DEL QUIZ (relevados del funnel analizado: 13 preguntas) ======
+  STEPS: [
+    { type:"cards", key:"satisfaccion", phase:"Diagnóstico", h:"¿Estás <span class='am'>satisfecha</span> con el tamaño y la forma de tu trasero hoy?", cols:1, opts:[
+      {t:"☹️ Estoy insatisfecha"},{t:"😀 Estoy satisfecha, pero quiero mejorar"}] },
+    { type:"cards", key:"molestia", phase:"Cuestionario", h:"¿Qué es lo que más te molesta cuando te mirás al espejo?", cols:1, opts:[
+      {t:"😩 Mi trasero pequeño o sin volumen"},{t:"😢 La falta de firmeza o definición"}] },
+    { type:"cards", key:"ropa", phase:"Cuestionario", h:"¿Alguna vez dejaste de usar ropa ajustada o bikini por no sentirte segura?", cols:1, opts:[
+      {t:"Sí, muchas veces"},{t:"Algunas veces, pero trato de disimularlo"},{t:"No, eso no es un problema para mí"}] },
+    { type:"cards", key:"creencia", phase:"Cuestionario", h:"¿Creés que es posible transformar tu trasero con entrenamientos cortos, en casa?", cols:1, opts:[
+      {t:"✅ Sí, creo que es posible"},{t:"🤔 Tal vez, nunca vi algo funcionar para mí"},{t:"💪 Quiero sentirme más saludable y con energía"},{t:"🙋 No estoy segura, pero quiero intentarlo"}] },
+    { type:"cards", key:"probaria", phase:"Cuestionario", h:"Si existiera un método probado, con entrenamientos cortos y un plan simple, ¿lo intentarías?", cols:1, opts:[
+      {t:"😁 Sí, con toda seguridad"},{t:"🤨 Dependería de los resultados prometidos"},{t:"😏 Mostrame resultados primero"}] },
+    { type:"cards", key:"minutos", phase:"Cuestionario", h:"¿Cuántos minutos al día podés dedicar a tu entrenamiento?", cols:1, opts:[
+      {t:"⚡ Menos de 10 minutos"},{t:"🕰 Entre 10 y 20 minutos"},{t:"🏋️ Más de 20 minutos"}] },
+    { type:"cards", key:"frecuencia", phase:"Cuestionario", h:"¿Con qué frecuencia podrías entrenar por semana?", cols:1, opts:[
+      {t:"📅 3 veces"},{t:"🔥 4 a 5 veces"},{t:"💪 Todos los días"}] },
+    { type:"cards", key:"comidas", phase:"Cuestionario", h:"¿Cuántas comidas hacés al día normalmente?", sub:"Esta es la clave de tu metabolismo: la mayoría lo hace mal y por eso no logra ver cambios.", cols:1, opts:[
+      {t:"😴 1 a 2 comidas"},{t:"🍽️ 3 comidas básicas al día"},{t:"✅ 4 a 5 comidas"},{t:"🍿 Como varias veces al día"}] },
+    { type:"cards", key:"edad", phase:"Cuestionario", h:"¿Cuál es tu edad?", cols:2, opts:[
+      {t:"18 - 29"},{t:"30 - 39"},{t:"40 - 49"},{t:"50+"}] },
+    { type:"inter", phase:"Información importante", icon:"⚠️", h:"¿Por qué entrenás duro y tu trasero no <span class='am'>reacciona</span>?",
+      body:"En muchos cuerpos, el glúteo se \"desactiva\" y el esfuerzo se transfiere a la zona lumbar y los muslos: el entrenamiento cansa, pero no levanta. No es falta de esfuerzo — es un problema de activación. La buena noticia: esto puede reprogramarse sin gimnasio y sin peso pesado, con el protocolo de activación de Glúteos Pro.",
+      quote:"SIN GIMNASIO · SIN PESO PESADO · SOLO ACTIVACIÓN" },
+    { type:"cards", key:"lista", phase:"Cuestionario", h:"¿Creés que estás lista para transformar tu cuerpo y tu autoestima de una vez por todas?", cols:1, opts:[
+      {t:"💪 Sí, estoy lista"},{t:"🙌 Casi lo tengo, solo necesito un empujón"},{t:"🌱 Necesito más motivación para empezar"}] },
+    { type:"cards", key:"objetivo", phase:"Cuestionario", h:"¿Cuál de estos objetivos soñás con alcanzar?", cols:1, opts:[
+      {t:"🍑 Levantado — para llamar la atención desde lejos"},{t:"💪 Esculpido — con curvas marcadas"},{t:"🔥 Musculoso — definido y poderoso"},{t:"✨ Redondito — con volumen y forma"}] },
+    { type:"cards", key:"obstaculo", phase:"Cuestionario", h:"¿Cuál es tu mayor obstáculo actual?", sub:"Conocer tu freno interno es clave para vencerlo.", cols:1, opts:[
+      {t:"😔 Falta de motivación constante"},{t:"🍫 Ansiedad y compulsión alimentaria"},{t:"⏰ Rutina agitada sin tiempo"},{t:"❓ No sé por dónde empezar"},{t:"💔 La baja autoestima me sabotea"}] },
+    { type:"cards", key:"compromiso", phase:"Cuestionario", h:"¿Estás lista para levantar tu trasero en hasta 28 días?", cols:1, opts:[
+      {t:"🔥 Sí, estoy 100% comprometida"},{t:"💪 Absolutamente, daré todo lo que tengo"},{t:"🚀 Con todo, quiero empezar hoy"},{t:"🤔 Todavía estoy pensando"}] }
+  ]
+};
+/* ================= FIN CONFIG (no toques abajo) ================= */
+
+/* ================= MONEDA LOCAL SEGUN PAIS (IP) ================= */
+// Mismo esquema que soonbody-tai-chi: detecta el país por IP y muestra el
+// precio convertido a la moneda local en vivo (cotización del día), excepto
+// Argentina que usa un precio fijo en ARS (evita que varíe con el dólar).
+var CURRENCY = { code:'USD', rate:1, locale:'en-US', country:'', ready:false };
+var AR_FIXED_PRICE_ARS = 14924; // Argentina: precio fijo, nunca se calcula por cotizacion.
+var FALLBACK_RATES = {
+  USD:1, ARS:1050, BRL:5.6, COP:4300, MXN:18.6, CLP:970, PEN:3.76, UYU:42,
+  PYG:7750, BOB:6.94, VES:47, CRC:512, PAB:1, GTQ:7.7, HNL:25.6, NIO:36.8,
+  DOP:60.5, EUR:0.92, GBP:0.79, CAD:1.38, AUD:1.52, INR:83.9
+};
+var LOCALE_BY_COUNTRY = {
+  AR:'es-AR', BR:'pt-BR', CO:'es-CO', MX:'es-MX', CL:'es-CL', PE:'es-PE',
+  UY:'es-UY', PY:'es-PY', BO:'es-BO', VE:'es-VE', CR:'es-CR', PA:'es-PA',
+  GT:'es-GT', HN:'es-HN', SV:'es-SV', NI:'es-NI', DO:'es-DO', EC:'es-EC',
+  US:'en-US', ES:'es-ES', GB:'en-GB', CA:'en-CA', AU:'en-AU', IN:'en-IN'
+};
+var ZERO_DECIMAL_CUR = {ARS:1,COP:1,CLP:1,PYG:1,VES:1};
+function fetchWithTimeout(url, ms){
+  return Promise.race([
+    fetch(url),
+    new Promise(function(_,rej){ setTimeout(function(){ rej(new Error('timeout')); }, ms); })
+  ]);
+}
+function detectCurrency(){
+  return new Promise(function(resolve){
+    var done=false;
+    function finish(cur){ if(done) return; done=true; resolve(cur); }
+    function withRate(code, country){
+      code = (code||'USD').toUpperCase();
+      if(code==='USD'){ finish({code:'USD', rate:1, locale:LOCALE_BY_COUNTRY[country]||'en-US', country:country||''}); return; }
+      fetchWithTimeout('https://open.er-api.com/v6/latest/USD', 3500)
+        .then(function(r){ return r.json(); })
+        .then(function(d){
+          var rate = d && d.rates && d.rates[code];
+          if(!rate) rate = FALLBACK_RATES[code];
+          finish(rate ? {code:code, rate:rate, locale:LOCALE_BY_COUNTRY[country]||'en-US', country:country||''} : {code:'USD', rate:1, locale:'en-US', country:country||''});
+        })
+        .catch(function(){
+          var rate = FALLBACK_RATES[code];
+          finish(rate ? {code:code, rate:rate, locale:LOCALE_BY_COUNTRY[country]||'en-US', country:country||''} : {code:'USD', rate:1, locale:'en-US', country:country||''});
+        });
+    }
+    fetchWithTimeout('https://ipapi.co/json/', 3000)
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if(d && d.currency && d.country_code){ withRate(d.currency, d.country_code); }
+        else { throw new Error('sin moneda'); }
+      })
+      .catch(function(){
+        fetchWithTimeout('https://ipwho.is/', 3000)
+          .then(function(r){ return r.json(); })
+          .then(function(d){
+            var code = d && d.currency && d.currency.code;
+            var country = d && d.country_code;
+            if(code && country){ withRate(code, country); }
+            else { finish({code:'USD', rate:1, locale:'en-US', country:''}); }
+          })
+          .catch(function(){ finish({code:'USD', rate:1, locale:'en-US', country:''}); });
+      });
+    setTimeout(function(){ finish({code:'USD', rate:1, locale:'en-US', country:''}); }, 5000);
+  });
+}
+function fmtPrice(usd){
+  if(!CURRENCY.ready || CURRENCY.code==='USD' || !CURRENCY.rate){ return '$'+usd.toFixed(2); }
+  var amount = usd*CURRENCY.rate;
+  try{
+    return new Intl.NumberFormat(CURRENCY.locale, {
+      style:'currency', currency:CURRENCY.code,
+      maximumFractionDigits: ZERO_DECIMAL_CUR[CURRENCY.code] ? 0 : 2,
+      minimumFractionDigits: ZERO_DECIMAL_CUR[CURRENCY.code] ? 0 : 2
+    }).format(amount);
+  }catch(e){ return '$'+usd.toFixed(2); }
+}
+function fmtNowPrice(usd){
+  // Argentina: precio fijo en pesos argentinos, nunca se recalcula por cotizacion del dolar.
+  if(CURRENCY.country==='AR'){
+    try{
+      return new Intl.NumberFormat('es-AR', { style:'currency', currency:'ARS', maximumFractionDigits:0, minimumFractionDigits:0 }).format(AR_FIXED_PRICE_ARS);
+    }catch(e){ return '$'+AR_FIXED_PRICE_ARS; }
+  }
+  return fmtPrice(usd);
+}
+function repaintPrices(){
+  var tier=CONFIG.TIERS[state?state.tier:0]||CONFIG.TIERS[0]; if(!tier) return;
+  var oldEl=document.getElementById('tierOld'), nowEl=document.getElementById('tierNow');
+  if(oldEl) oldEl.textContent=fmtPrice(tier.oldUsd);
+  if(nowEl) nowEl.textContent=fmtNowPrice(tier.nowUsd);
+}
+var CURRENCY_CACHE_KEY='sp_currency_v1';
+(function initCurrency(){
+  try{
+    var cached=JSON.parse(localStorage.getItem(CURRENCY_CACHE_KEY)||'null');
+    if(cached && cached.ts && (Date.now()-cached.ts < 12*3600*1000)){
+      CURRENCY=cached; CURRENCY.ready=true; repaintPrices();
+      return;
+    }
+  }catch(e){}
+  detectCurrency().then(function(cur){
+    CURRENCY=cur; CURRENCY.ready=true;
+    try{ localStorage.setItem(CURRENCY_CACHE_KEY, JSON.stringify(Object.assign({ts:Date.now()},cur))); }catch(e){}
+    repaintPrices();
+  });
+})();
+/* ================= FIN MONEDA LOCAL ================= */
+
+var stage=document.getElementById('spStage'), backBtn=document.getElementById('spBack');
+var _pop=CONFIG.TIERS.findIndex(function(t){return t.popular;});
+var state={ i:0, tier:_pop>=0?_pop:0, answers:{} };
+var STEPS=CONFIG.STEPS, TOTAL=STEPS.length;
+
+function thumb(img,label){ return img?'<div class="sp-thumb"><img src="'+img+'" alt="" loading="lazy" decoding="async"></div>':'<div class="sp-thumb">'+(label||'IMAGEN')+'</div>'; }
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function metaBlock(){
+  var n=state.i+1, pct=Math.round(n/TOTAL*100);
+  return '<div class="sp-meta"><div class="sp-meta-top"><div><span class="sp-meta-tag">Cuestionario</span>'+
+    '<span class="sp-meta-q">Pregunta '+(n<10?'0'+n:n)+'</span></div>'+
+    '<span class="sp-meta-pct">'+pct+'%</span></div>'+
+    '<div class="sp-meta-bar"><div class="sp-meta-fill" style="width:'+pct+'%"></div></div></div>';
+}
+function updateBack(){ backBtn.classList.toggle('show', state.i>0 && state.i<TOTAL); }
+function go(n){ state.i=n; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+backBtn.onclick=function(){ if(state.i>0) go(state.i-1); };
+
+function render(){
+  updateBack();
+  if(state.i>=TOTAL) return runLoader();
+  var s=STEPS[state.i], html='';
+  if(state.i===0) html+='<div class="sp-badge"><span class="dot"></span>Cupos Abiertos Hoy</div>';
+  else if(s.type!=='inter') html+=metaBlock();
+  if(s.h) html+='<h1 class="sp-h">'+s.h+'</h1>';
+  if(s.sub) html+='<p class="sp-sub">'+esc(s.sub)+'</p>';
+
+  if(s.type==='cards'){
+    var hasImg=s.opts.some(function(o){return o.img;});
+    html+='<div class="sp-grid '+(hasImg&&s.cols===2?'cols2':'')+'">';
+    s.opts.forEach(function(o,idx){
+      if(hasImg){ html+='<div class="sp-card" data-i="'+idx+'">'+thumb(o.img,o.t)+
+        '<div class="sp-label">'+esc(o.t)+(o.cap?'<span class="sp-cap">'+esc(o.cap)+'</span>':'')+'</div></div>'; }
+      else { html+='<div class="sp-card row" data-i="'+idx+'"><div class="sp-label">'+esc(o.t)+(o.cap?'<span class="sp-cap">'+esc(o.cap)+'</span>':'')+'</div><span class="sp-arrow">›</span></div>'; }
+    });
+    html+='</div>'; stage.innerHTML=html;
+    stage.querySelectorAll('.sp-card').forEach(function(c){ c.onclick=function(){
+      if(c.classList.contains('sel'))return; stage.querySelectorAll('.sp-card').forEach(function(x){x.classList.remove('sel');});
+      c.classList.add('sel'); state.answers[s.key||state.i]=s.opts[c.dataset.i].t;
+      navigator.vibrate&&navigator.vibrate(10);
+      setTimeout(function(){ go(state.i+1); },280); }; });
+    return;
+  }
+  if(s.type==='multi'||s.type==='empathy'){
+    var hasImgM=s.opts.some(function(o){return o.img;});
+    html+='<div class="sp-grid '+(hasImgM?'cols2':'')+'">';
+    s.opts.forEach(function(o,idx){
+      if(hasImgM){ html+='<div class="sp-card" data-i="'+idx+'">'+thumb(o.img,o.t)+
+        '<div class="sp-label" style="display:flex;align-items:center;justify-content:space-between;gap:8px">'+esc(o.t)+'<span class="sp-check" style="margin:0;flex:none">✓</span></div></div>'; }
+      else { html+='<div class="sp-card row" data-i="'+idx+'"><div class="sp-label">'+esc(o.t)+'</div><span class="sp-check">✓</span></div>'; }
+    });
+    html+='</div>';
+    if(s.type==='empathy') html+='<div id="spBox" style="display:none"><div class="sp-empathy"><b>'+esc(s.box.title)+'</b><p>'+esc(s.box.text)+'</p></div></div>';
+    html+='<button class="sp-cta" id="spNext" disabled>Continuar →</button>';
+    stage.innerHTML=html; var picked={};
+    stage.querySelectorAll('.sp-card').forEach(function(c){ c.onclick=function(){
+      c.classList.toggle('sel'); picked[c.dataset.i]=c.classList.contains('sel');
+      var any=Object.keys(picked).some(function(k){return picked[k];});
+      document.getElementById('spNext').disabled=!any;
+      if(s.type==='empathy'&&any) document.getElementById('spBox').style.display='block'; }; });
+    document.getElementById('spNext').onclick=function(){
+      state.answers[s.key||state.i]=s.opts.filter(function(o,idx){return picked[idx];}).map(function(o){return o.t;});
+      go(state.i+1); };
+    return;
+  }
+  if(s.type==='inter'){
+    html='';
+    html+='<div class="sp-inter"><div class="sp-icon">'+(s.icon||'🛡️')+'</div><h1>'+(s.h||'')+'</h1><p>'+esc(s.body||'')+'</p>'+(s.quote?'<p class="sp-quote">'+esc(s.quote)+'</p>':'')+'</div>';
+    html+='<button class="sp-cta" id="spNext">Continuar →</button>';
+    stage.innerHTML=html; document.getElementById('spNext').onclick=function(){ go(state.i+1); };
+    return;
+  }
+  if(s.type==='commit'){
+    html+='<div class="sp-grid">';
+    s.opts.forEach(function(o,idx){ html+='<div class="sp-card row" data-i="'+idx+'"><div class="sp-label">'+esc(o.t)+'</div></div>'; });
+    html+='</div>'; stage.innerHTML=html;
+    stage.querySelectorAll('.sp-card').forEach(function(c){ c.onclick=function(){ c.classList.add('sel'); setTimeout(function(){go(state.i+1);},260); }; });
+    return;
+  }
+  if(s.type==='slider'){
+    html+='<div id="spSliderHost"></div><button class="sp-cta" id="spNext">Continuar →</button>';
+    stage.innerHTML=html;
+    var sl=spRuler({min:s.min,max:s.max,value:s.value,step:s.step||1,unit:s.unit||''});
+    document.getElementById('spSliderHost').appendChild(sl);
+    requestAnimationFrame(function(){ sl.refresh(); });
+    document.getElementById('spNext').onclick=function(){ state.answers[s.key||state.i]=sl.getValue(); go(state.i+1); };
+    return;
+  }
+  if(s.type==='input'){
+    html+='<input class="sp-input" id="spInput" placeholder="'+esc(s.placeholder||'')+'" autocomplete="off">';
+    html+='<button class="sp-cta" id="spNext" disabled>Continuar →</button>';
+    stage.innerHTML=html;
+    var inp=document.getElementById('spInput'), nx=document.getElementById('spNext'); inp.focus();
+    inp.oninput=function(){ nx.disabled=!inp.value.trim(); };
+    inp.onkeydown=function(e){ if(e.key==='Enter'&&inp.value.trim()) nx.click(); };
+    nx.onclick=function(){ if(s.key) state.answers[s.key]=inp.value.trim(); go(state.i+1); };
+    return;
+  }
+}
+
+// Loader tipo checklist (igual al del funnel original): una lista de pasos
+// que se van tildando en vivo mientras avanza una barra de progreso.
+function runLoader(){
+  backBtn.classList.remove('show');
+  var steps=['Analizando tus respuestas','Preparando los 28 días','Calculando tu potencial','Preparando tu plan personalizado'];
+  var rows=steps.map(function(t,idx){
+    return '<div class="sp-lc-row" data-i="'+idx+'"><span class="sp-lc-ic">○</span><span class="sp-lc-label">'+esc(t.toUpperCase())+'</span></div>';
+  }).join('');
+  stage.style.padding='26px 18px 4px';
+  stage.innerHTML='<div class="sp-loader2">'+
+    '<div class="sp-badge"><span class="dot"></span>Análisis en curso</div>'+
+    '<h1 class="sp-h">Analizando tus <span class="am">respuestas</span></h1>'+
+    '<p class="sp-sub">Procesando tu perfil personalizado...</p>'+
+    '<div class="sp-lc-status"><span>Estado: <b id="spLState">Analizando</b></span><span id="spLPct">0%</span></div>'+
+    '<div class="sp-ltrack"><div class="sp-lfill" id="spLF"></div></div>'+
+    '<div class="sp-lc-list">'+rows+'</div>'+
+    '<p class="sp-lc-footer">Análisis seguro · Sin compromiso · Gratuito</p></div>';
+  var rowsEl=stage.querySelectorAll('.sp-lc-row'), n=rowsEl.length;
+  var p=0;
+  var iv=setInterval(function(){
+    p+=Math.random()*6+2; if(p>=100)p=100;
+    document.getElementById('spLPct').textContent=Math.floor(p)+'%';
+    document.getElementById('spLF').style.width=p+'%';
+    var active=Math.min(n-1, Math.floor(p/100*n));
+    rowsEl.forEach(function(r,idx){
+      var ic=r.querySelector('.sp-lc-ic');
+      if(idx<active){ r.classList.add('done'); r.classList.remove('active'); ic.textContent='✓'; }
+      else if(idx===active){ r.classList.add('active'); ic.textContent='●'; }
+    });
+    if(p>=100){
+      clearInterval(iv);
+      rowsEl.forEach(function(r){ r.classList.add('done'); r.classList.remove('active'); r.querySelector('.sp-lc-ic').textContent='✓'; });
+      setTimeout(renderApproved,550);
+    }
+  },180);
+}
+// Pantalla "PERFIL ANALIZADO" (equivalente a la del funnel original): informe
+// final con 3 features + botón para pasar a la presentación del coach y
+// luego al gate de video.
+function renderApproved(){
+  stage.style.padding='24px 18px 42px';
+  var id='#'+Math.floor(10+Math.random()*89)+'X-'+Math.floor(100+Math.random()*899);
+  stage.innerHTML='<div class="sp-approved">'+
+    '<div class="sp-icon" style="margin:0 auto 18px">✨</div>'+
+    '<h1 class="sp-h">¡Análisis <span class="am">completado</span>!</h1>'+
+    '<p class="sp-sub">Tu perfil fue analizado y ya tenemos tu plan personalizado listo.</p>'+
+    '<div class="sp-report">'+
+      '<div class="sp-report-top"><span>Perfil analizado</span><span>ID: '+id+'</span></div>'+
+      '<div class="sp-report-row"><span class="ic">📋</span><div><b>Plan generado</b><p>Rutina adaptada a tu edad, tu objetivo y el tiempo que dijiste tener disponible.</p></div></div>'+
+      '<div class="sp-report-row"><span class="ic">🎥</span><div><b>Acceso a videos</b><p>Ejecución paso a paso de cada ejercicio, sin gimnasio.</p></div></div>'+
+      '<div class="sp-report-row"><span class="ic">🛡️</span><div><b>Garantía de resultados</b><p>45 días de garantía de devolución si seguís el plan y no ves cambios.</p></div></div>'+
+    '</div>'+
+    '<button class="sp-cta" id="spAccess">Ver mi plan 🔓</button></div>';
+  document.getElementById('spAccess').onclick=renderCoach;
+}
+// Presentación del coach: persona ficticia propia de Glúteos Pro (no se
+// reusa el nombre, la foto ni las credenciales del "Coach Luca" del sitio
+// analizado — ver README.md).
+function renderCoach(){
+  stage.style.padding='24px 18px 42px';
+  stage.innerHTML='<div class="sp-approved" style="text-align:center">'+
+    '<div class="sp-badge" style="margin:0 auto 14px"><span class="dot"></span>Tu coach</div>'+
+    '<h1 class="sp-h">'+esc(CONFIG.COACH_NAME)+'</h1>'+
+    '<p class="sp-sub" style="text-transform:uppercase;letter-spacing:.04em;font-weight:600">'+esc(CONFIG.COACH_TITLE)+'</p>'+
+    '<div class="sp-icon" style="margin:14px auto 18px;width:96px;height:96px;font-size:42px">🍑</div>'+
+    '<p style="color:var(--soft);font-size:14px;line-height:1.6;max-width:400px;margin:0 auto">Especializada en entrenamiento de activación de glúteos para mujeres, con rutinas cortas pensadas para hacer en casa sin equipamiento.</p>'+
+    '<button class="sp-cta" id="spAccess2" style="margin-top:22px">Continuar →</button></div>';
+  document.getElementById('spAccess2').onclick=renderVideoGate;
+}
+// Gate de video (placeholder hasta tener el video real) con botón para
+// saltarlo y pasar directo a la oferta.
+function renderVideoGate(){
+  stage.style.padding='24px 18px 42px';
+  stage.innerHTML='<div class="sp-videogate">'+
+    '<p class="sp-sub">Tu video ha comenzado, mirálo y desbloqueá el plan.</p>'+
+    '<div class="sp-video-box">🎥<span>Video próximamente<br>(placeholder)</span></div>'+
+    '<button class="sp-cta" id="spSkipVideo" style="margin-top:20px">Pasar sin video →</button></div>';
+  document.getElementById('spSkipVideo').onclick=renderSale;
+}
+
+function renderSale(){
+  backBtn.style.display='none';
+  var name=state.answers.name?esc(state.answers.name):'vos';
+  var brand=esc(CONFIG.BRAND_PLAIN);
+  var hero=CONFIG.IMG.sale_hero?'<img src="'+CONFIG.IMG.sale_hero+'" alt="">':'IMAGEN DEL PLAN';
+  var tiers='';
+  CONFIG.TIERS.forEach(function(t,idx){
+    var offPct=t.oldUsd?Math.round((1-t.nowUsd/t.oldUsd)*100)+'% OFF':'';
+    tiers+='<div class="sp-tier'+(t.popular?' pop':'')+(idx===state.tier?' sel':'')+'" data-i="'+idx+'">'+
+      (t.popular?'<span class="sp-pop">★ Más elegido</span>':'')+
+      '<div class="sp-tier-row"><div><span class="sp-radio"></span>'+
+      '<span class="sp-tier-name">'+esc(t.name)+'</span><br>'+
+      (t.oldUsd?'<span class="sp-tier-old" id="tierOld">'+fmtPrice(t.oldUsd)+'</span>':'')+'<span class="sp-tier-now" id="tierNow">'+fmtNowPrice(t.nowUsd)+'</span>'+
+      (offPct?'<br><span class="sp-off">'+offPct+'</span>':'')+
+      '</div><div class="sp-perday"><div class="pd">🔓</div><div class="u">DE POR VIDA</div></div></div>'+
+      (t.bonus?'<div class="sp-bonus">'+esc(t.bonus)+'</div>':'')+'</div>';
+  });
+  var incl=(CONFIG.INCLUDES||[]).map(function(x){return '<li><span class="ck">✔</span><span>'+esc(x)+'</span></li>';}).join('');
+  var inclSec=incl?'<div class="sp-sec"><h2 class="sp-sec-h">Qué incluye tu <span class="am">'+brand+'</span></h2><ul class="sp-incl">'+incl+'</ul></div>':'';
+  var progSec=CONFIG.IMG.program?'<div class="sp-sec"><h2 class="sp-sec-h">Tu <span class="am">plan</span></h2><div class="sp-hero-img" style="aspect-ratio:3/2">'+'<img src="'+CONFIG.IMG.program+'" alt="">'+'</div></div>':'';
+  var how=(CONFIG.HOW||[]).map(function(s){return '<div class="st"><div class="num">'+esc(s.n)+'</div><div><b>'+esc(s.t)+'</b><p>'+esc(s.d)+'</p></div></div>';}).join('');
+  var howSec=how?'<div class="sp-sec"><h2 class="sp-sec-h">El <span class="am">camino</span></h2><div class="sp-how">'+how+'</div></div>':'';
+  var bonuses=(CONFIG.BONUSES||[]).map(function(x){return '<li><span class="ck">🎁</span><span><b>'+esc(x.t)+'</b> — '+esc(x.d)+' <span style="color:var(--soft)">(valor '+esc(x.value)+')</span></span></li>';}).join('');
+  var bonusSec=bonuses?'<div class="sp-sec"><h2 class="sp-sec-h">Bonos <span class="am">exclusivos</span></h2><ul class="sp-incl">'+bonuses+'</ul></div>':'';
+  var tst=(CONFIG.TESTIMONIALS||[]).map(function(x){return '<div class="c"><div class="stars">★★★★★</div><p class="q">"'+esc(x.text)+'"</p><div class="who"><b>'+esc(x.name)+'</b><span class="res">'+esc(x.result)+'</span></div></div>';}).join('');
+  var tstSec=tst?'<div class="sp-sec"><h2 class="sp-sec-h">Historias <span class="am">reales</span></h2><div class="sp-tst">'+tst+'</div></div>':'';
+  var faq=(CONFIG.FAQ||[]).map(function(x){return '<div class="it"><button class="q">'+esc(x.q)+'</button><div class="a">'+esc(x.a)+'</div></div>';}).join('');
+  var faqSec=faq?'<div class="sp-sec sp-faq"><h2 class="sp-sec-h">Preguntas <span class="am">frecuentes</span></h2>'+faq+'</div>':'';
+  var authority='<div class="sp-sec sp-auth"><div class="sp-laurel"><span class="lf">🍑</span><span>+12.400</span><span class="lf">🍑</span></div>'+
+    '<div class="sp-auth-sub">mujeres empezaron su plan este mes</div>'+
+    '<div class="sp-stars">★★★★★ <b>4.8</b>/5</div><div class="sp-auth-sub">basado en +9.200 valoraciones</div></div>';
+  var pay='<div class="sp-pay"><span>🔒 Pago 100% seguro y encriptado</span><div class="sp-cards"><span>VISA</span><span>Mastercard</span><span>Amex</span><span>PayPal</span></div></div>';
+
+  stage.style.padding='0';
+  stage.innerHTML='<div class="sp-sale">'+
+    '<div class="sp-timer">⏳ La oferta vence en <span id="spClock">'+CONFIG.TIMER_MIN+':00</span></div>'+
+    '<div class="sp-salebody">'+
+    '<h1 class="sp-h">Tu '+brand+'</h1>'+
+    '<p class="sp-sub">Armado según tus respuestas</p>'+
+    '<div class="sp-hero-img">'+hero+'</div>'+
+    '<div class="sp-won">🎉 <b>¡Ganaste el mayor descuento!</b><br><span style="font-size:13px;color:var(--soft)">Aplicado a tu plan por tiempo limitado</span></div>'+
+    inclSec + bonusSec + progSec + howSec +
+    '<div class="sp-sec"><h2 class="sp-sec-h">Elegí tu <span class="am">plan</span></h2>'+tiers+
+    '<a class="sp-cta" id="spBuy" href="#">QUIERO MI TRANSFORMACIÓN AHORA</a></div>'+
+    pay +
+    '<div class="sp-guar"><span class="g-ic">🛡️</span><div><b style="color:var(--ink)">Garantía de devolución · 45 días.</b> Si seguís el plan y no ves resultados visibles, te devolvemos el 100%. Sin preguntas.</div></div>'+
+    authority + tstSec + faqSec +
+    '<div class="sp-proof"><b>+12.400 mujeres</b> ya empezaron su transformación este mes</div>'+
+    '<p class="sp-disc">*Resultados ilustrativos, no garantizados. Los resultados individuales varían según constancia, alimentación y metabolismo. Consultá a un profesional de la salud antes de empezar cualquier programa de ejercicio.</p>'+
+    '</div></div>';
+
+  function paint(){ stage.querySelectorAll('.sp-tier').forEach(function(el){ el.classList.toggle('sel',+el.dataset.i===state.tier); }); upd(); }
+  function checkoutUrlWithParams(){
+    var base=CONFIG.STORE||'#';
+    var search=window.location.search;
+    if(!search) return base;
+    var sep = base.indexOf('?')>-1 ? '&' : '?';
+    return base+sep+search.replace(/^\?/,'');
+  }
+  function upd(){
+    var b=document.getElementById('spBuy');
+    b.href=checkoutUrlWithParams();
+    if(!b.dataset.tracked){
+      b.dataset.tracked='1';
+      b.addEventListener('click', function(e){
+        e.preventDefault();
+        window.location.href=checkoutUrlWithParams();
+      });
+    }
+  }
+  stage.querySelectorAll('.sp-tier').forEach(function(el){ el.onclick=function(){ state.tier=+el.dataset.i; paint(); }; });
+  stage.querySelectorAll('.sp-faq .q').forEach(function(b){ b.onclick=function(){ b.parentElement.classList.toggle('open'); }; });
+  upd();
+  var total=CONFIG.TIMER_MIN*60, clock=document.getElementById('spClock');
+  var ci=setInterval(function(){ total--; if(total<0){clearInterval(ci);return;} var m=Math.floor(total/60),s=total%60; clock.textContent=m+':'+(s<10?'0':'')+s; },1000);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+render();
+})();
+</script>
+
+</body>
+</html>
