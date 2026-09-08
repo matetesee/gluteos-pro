@@ -104,10 +104,10 @@
 #sp .sp-card.sel .sp-check{background:var(--bronze2);border-color:var(--bronze2);transform:scale(1.08)}
 
 /* buttons */
-#sp .sp-cta{display:block;width:100%;margin-top:22px;padding:17px;border:none;border-radius:13px;font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:16px;color:#fff;cursor:pointer;background:var(--bronze2);box-shadow:0 10px 26px rgba(255,45,135,.32);transition:transform .15s,filter .2s;text-align:center;text-decoration:none;position:relative;overflow:hidden}
+#sp .sp-cta{display:block;width:100%;margin-top:22px;padding:17px;border:none;border-radius:13px;font-family:'Oswald',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:16px;color:#fff;cursor:pointer;background:#F0A8CC;box-shadow:0 10px 26px rgba(255,45,135,.18);transition:transform .15s,background .2s,box-shadow .2s;text-align:center;text-decoration:none;position:relative;overflow:hidden}
 #sp .sp-cta::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);animation:spShine 3.2s infinite}
 @keyframes spShine{0%{left:-60%}55%,100%{left:130%}}
-#sp .sp-cta:hover{transform:translateY(-2px);filter:brightness(1.05)}
+#sp .sp-cta:hover{transform:translateY(-2px);background:var(--bronze2);box-shadow:0 10px 26px rgba(255,45,135,.45)}
 #sp .sp-cta:disabled{opacity:.35;cursor:not-allowed;transform:none}
 #sp .sp-cta:disabled::after{display:none}
 
@@ -737,7 +737,7 @@ function renderLanding(){
     '<button class="sp-cta" id="spStart">¡Empezar ahora!</button>'+
     '<p class="sp-disc">⚡ Atención: solo un test gratuito por persona</p>';
   if(imgs.length) initCarousel('landingCar', imgs.length);
-  document.getElementById('spStart').onclick=function(){ render(); };
+  document.getElementById('spStart').onclick=renderCoach;
 }
 
 function render(){
@@ -858,8 +858,7 @@ function runLoader(){
   },180);
 }
 // Pantalla "PERFIL ANALIZADO" (equivalente a la del funnel original): informe
-// final con 3 features + botón para pasar a la presentación del coach y
-// luego al gate de video.
+// final con 3 features + botón para pasar directo al gate de video.
 function renderApproved(){
   stage.style.padding='24px 18px 42px';
   var id='#'+Math.floor(10+Math.random()*89)+'X-'+Math.floor(100+Math.random()*899);
@@ -874,12 +873,14 @@ function renderApproved(){
       '<div class="sp-report-row"><span class="ic">🛡️</span><div><b>Garantía de resultados</b><p>45 días de garantía de devolución si seguís el plan y no ves cambios.</p></div></div>'+
     '</div>'+
     '<button class="sp-cta" id="spAccess">Ver mi plan 🔓</button></div>';
-  document.getElementById('spAccess').onclick=renderCoach;
+  document.getElementById('spAccess').onclick=renderVideoGate;
 }
-// Presentación del coach (mismo layout que el sitio analizado: dos fotos
-// lado a lado + bio + estrellas + cantidad de alumnas + botón). Es una
-// persona ficticia propia de Glúteos Pro — no se reusa el nombre, las
-// fotos ni las credenciales del "Coach Luca" del sitio analizado (ver
+// Presentación del coach (mismo layout y mismo lugar del flujo que el
+// sitio analizado: aparece apenas se toca "¡Empezar ahora!" en la
+// portada, ANTES del cuestionario — dos fotos lado a lado + bio +
+// estrellas + cantidad de alumnas + botón). Es una persona ficticia
+// propia de Glúteos Pro — no se reusa el nombre, las fotos ni las
+// credenciales del "Coach Luca" del sitio analizado (ver
 // README.md): esas dos fotos puntuales sí se reemplazan por fotos de
 // stock, porque reusar la cara/nombre real de otra persona como si avalara
 // este producto sería suplantación de identidad.
@@ -901,7 +902,7 @@ function renderCoach(){
       '<p style="color:var(--soft);font-size:13px">+50.000 alumnas</p>'+
     '</div>'+
     '<button class="sp-cta" id="spAccess2" style="margin-top:14px">Quiero empezar ahora →</button></div>';
-  document.getElementById('spAccess2').onclick=renderVideoGate;
+  document.getElementById('spAccess2').onclick=render;
 }
 // Gate de video (placeholder hasta tener el video real) con botón para
 // saltarlo y pasar directo a la oferta.
