@@ -289,6 +289,20 @@
 #sp .sp-report-row p{color:var(--soft);font-size:12.5px;line-height:1.4;margin:0}
 #sp .sp-video-box{aspect-ratio:9/14;max-height:380px;margin:16px auto 0;background:rgba(255,255,255,.12);border:1px dashed rgba(255,255,255,.4);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:34px;color:#fff;gap:10px;text-align:center;padding:20px}
 #sp .sp-video-box span{font-size:12px;letter-spacing:.04em;max-width:220px;line-height:1.4}
+/* Dos fotos lado a lado en la sección del coach (mismo layout que el original) */
+#sp .sp-coach-photos{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+#sp .sp-coach-ph{aspect-ratio:3/4;border-radius:14px;overflow:hidden;background:linear-gradient(155deg,var(--bronze2),var(--crimson2))}
+#sp .sp-coach-ph img{width:100%;height:100%;object-fit:cover;display:block;mix-blend-mode:normal}
+
+/* Carrusel con movimiento (portada y sección del coach) */
+#sp .sp-car{width:100%;margin:0 auto 16px;border-radius:14px;overflow:hidden;position:relative;background:var(--card)}
+#sp .sp-car-track{display:flex;width:100%;height:100%;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+#sp .sp-car-slide{flex:0 0 100%;width:100%;height:100%}
+#sp .sp-car-slide img{width:100%;height:100%;object-fit:cover;display:block}
+#sp .sp-car-dots{position:absolute;left:0;right:0;bottom:10px;display:flex;justify-content:center;gap:6px}
+#sp .sp-car-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.55);cursor:pointer;box-shadow:0 0 0 1px rgba(0,0,0,.15)}
+#sp .sp-car-dot.on{background:var(--bronze2)}
+
 /* Gate de video: fondo degradé vivo (igual al del sitio analizado en ese paso puntual) */
 #sp .sp-videogate{margin:-24px -18px -42px;padding:32px 18px 42px;min-height:calc(84vh - 26px);background:linear-gradient(160deg,#7C3AED 0%,#C026A3 55%,#FF2D87 100%);color:#fff}
 #sp .sp-videogate .sp-sub{color:rgba(255,255,255,.92);font-size:16px;font-weight:600;max-width:320px;margin:0 auto}
@@ -479,11 +493,17 @@ var CONFIG = {
   STORE: "", // Checkout / tienda: completar cuando esté lista (Shopify, Stripe, etc.)
   TIMER_MIN: 15,
 
-  // Imágenes. "landing" es la misma foto de demostración (ejercicio +
-  // flecha) del sitio analizado — es un gráfico instructivo, no una foto
-  // personal, así que sí se reusa tal cual. "sale_hero" es una foto de
-  // stock libre de derechos (Pexels), no es una foto del sitio original.
-  IMG: { landing: "images/demo.webp", sale_hero: "images/hero.jpg", program: "" },
+  // Imágenes. "landing" es un carrusel: la primera foto es la misma
+  // demostración del ejercicio (con la flecha) del sitio analizado — es un
+  // gráfico instructivo, no una foto personal, así que sí se reusa tal
+  // cual; la segunda es una foto de stock libre de derechos. "coach" son
+  // dos fotos de stock (no las de "Coach Luca") para el mismo layout de
+  // dos fotos lado a lado. "sale_hero" también es de stock (Pexels).
+  IMG: {
+    landing: ["images/demo.webp", "images/hero.jpg"],
+    coach: ["images/coach2.jpg", "images/coach-solo.jpg"],
+    sale_hero: "images/hero.jpg", program: ""
+  },
 
   // ====== PLAN (precio único, igual al funnel analizado) ======
   // oldUsd/nowUsd son la base en USD: el precio real que ve cada visitante
@@ -677,20 +697,46 @@ function updateBack(){ backBtn.classList.toggle('show', state.i>0 && state.i<TOT
 function go(n){ state.i=n; render(); window.scrollTo({top:0,behavior:'smooth'}); }
 backBtn.onclick=function(){ if(state.i>0) go(state.i-1); };
 
-// Portada inicial (igual a la del sitio analizado): título + imagen +
-// botón para arrancar el cuestionario. En el sitio original esto es la
-// pantalla que se ve antes de la primera pregunta.
+// Carrusel simple con autoplay (igual de idea al del sitio analizado, que
+// tiene movimiento en la portada). Recibe un array de URLs de imagen y
+// devuelve el HTML + arranca el intervalo de avance automático.
+function buildCarousel(id, imgs, opts){
+  opts=opts||{};
+  var ratio=opts.ratio||'3/4', maxW=opts.maxW||280;
+  var slides=imgs.map(function(src){return '<div class="sp-car-slide"><img src="'+src+'" alt="" loading="lazy"></div>';}).join('');
+  var dots=imgs.map(function(_,i){return '<span class="sp-car-dot'+(i===0?' on':'')+'" data-i="'+i+'"></span>';}).join('');
+  return '<div class="sp-car" id="'+id+'" style="aspect-ratio:'+ratio+';max-width:'+maxW+'px">'+
+    '<div class="sp-car-track">'+slides+'</div>'+
+    (imgs.length>1?'<div class="sp-car-dots">'+dots+'</div>':'')+
+  '</div>';
+}
+function initCarousel(id, count){
+  if(count<2) return;
+  var el=document.getElementById(id); if(!el) return;
+  var track=el.querySelector('.sp-car-track'), dots=el.querySelectorAll('.sp-car-dot');
+  var i=0;
+  function show(n){ i=(n+count)%count; track.style.transform='translateX(-'+(i*100)+'%)';
+    dots.forEach(function(d,di){ d.classList.toggle('on', di===i); }); }
+  var iv=setInterval(function(){ show(i+1); }, 2800);
+  dots.forEach(function(d){ d.onclick=function(){ clearInterval(iv); show(+d.dataset.i); }; });
+}
+
+// Portada inicial (igual a la del sitio analizado): título + carrusel con
+// movimiento + botón para arrancar el cuestionario. En el sitio original
+// esto es la pantalla que se ve antes de la primera pregunta.
 function renderLanding(){
   stage.style.padding='26px 18px 32px';
+  var imgs=CONFIG.IMG.landing||[];
   stage.innerHTML=
     '<h1 class="sp-h" style="font-size:24px">Transformá tu cuerpo en apenas 28 días y con apenas <span class="am">8 minutos por día</span></h1>'+
     '<p class="sp-sub" style="margin-bottom:14px">¡Sin necesidad de gimnasio ni rellenos!</p>'+
-    (CONFIG.IMG.landing?'<div class="sp-hero-img" style="aspect-ratio:3/4;max-width:280px;margin:0 auto 16px"><img src="'+CONFIG.IMG.landing+'" alt=""></div>':'')+
+    (imgs.length?buildCarousel('landingCar', imgs, {ratio:'3/4',maxW:280}):'')+
     '<p class="sp-sub">¡Respondé el test rápido y recibí ya tu entrenamiento personalizado!</p>'+
     '<p style="text-align:center;font-family:\'Oswald\';font-weight:700;color:var(--bronze2);text-transform:uppercase;margin:10px 0 4px">¡Tocá el botón de abajo!</p>'+
     '<p style="text-align:center;font-size:20px;margin-bottom:14px">👇🏽👇🏽👇🏽</p>'+
     '<button class="sp-cta" id="spStart">¡Empezar ahora!</button>'+
     '<p class="sp-disc">⚡ Atención: solo un test gratuito por persona</p>';
+  if(imgs.length) initCarousel('landingCar', imgs.length);
   document.getElementById('spStart').onclick=function(){ render(); };
 }
 
@@ -830,18 +876,31 @@ function renderApproved(){
     '<button class="sp-cta" id="spAccess">Ver mi plan 🔓</button></div>';
   document.getElementById('spAccess').onclick=renderCoach;
 }
-// Presentación del coach: persona ficticia propia de Glúteos Pro (no se
-// reusa el nombre, la foto ni las credenciales del "Coach Luca" del sitio
-// analizado — ver README.md).
+// Presentación del coach (mismo layout que el sitio analizado: dos fotos
+// lado a lado + bio + estrellas + cantidad de alumnas + botón). Es una
+// persona ficticia propia de Glúteos Pro — no se reusa el nombre, las
+// fotos ni las credenciales del "Coach Luca" del sitio analizado (ver
+// README.md): esas dos fotos puntuales sí se reemplazan por fotos de
+// stock, porque reusar la cara/nombre real de otra persona como si avalara
+// este producto sería suplantación de identidad.
 function renderCoach(){
   stage.style.padding='24px 18px 42px';
+  var photos=(CONFIG.IMG.coach||[]).map(function(src){
+    return '<div class="sp-coach-ph"><img src="'+src+'" alt=""></div>';
+  }).join('');
+  var photosSec=photos?'<div class="sp-coach-photos">'+photos+'</div>':'';
   stage.innerHTML='<div class="sp-approved" style="text-align:center">'+
     '<div class="sp-badge" style="margin:0 auto 14px"><span class="dot"></span>Tu coach</div>'+
     '<h1 class="sp-h">'+esc(CONFIG.COACH_NAME)+'</h1>'+
     '<p class="sp-sub" style="text-transform:uppercase;letter-spacing:.04em;font-weight:600">'+esc(CONFIG.COACH_TITLE)+'</p>'+
-    '<div class="sp-icon" style="margin:14px auto 18px;width:96px;height:96px;font-size:42px">🍑</div>'+
-    '<p style="color:var(--soft);font-size:14px;line-height:1.6;max-width:400px;margin:0 auto">Especializada en entrenamiento de activación de glúteos para mujeres, con rutinas cortas pensadas para hacer en casa sin equipamiento.</p>'+
-    '<button class="sp-cta" id="spAccess2" style="margin-top:22px">Continuar →</button></div>';
+    photosSec+
+    '<p style="color:var(--soft);font-size:14px;line-height:1.6;max-width:400px;margin:14px auto 0">Especializada en entrenamiento de activación de glúteos para mujeres, con rutinas cortas pensadas para hacer en casa sin equipamiento.</p>'+
+    '<div style="margin-top:22px">'+
+      '<p style="font-family:\'Oswald\';font-weight:700;color:var(--bronze2);text-transform:uppercase;letter-spacing:.04em;font-size:14px">Resultados reales 🍑</p>'+
+      '<p style="font-size:20px;letter-spacing:2px;color:var(--bronze2);margin:4px 0">★★★★★</p>'+
+      '<p style="color:var(--soft);font-size:13px">+50.000 alumnas</p>'+
+    '</div>'+
+    '<button class="sp-cta" id="spAccess2" style="margin-top:14px">Quiero empezar ahora →</button></div>';
   document.getElementById('spAccess2').onclick=renderVideoGate;
 }
 // Gate de video (placeholder hasta tener el video real) con botón para

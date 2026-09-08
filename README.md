@@ -12,14 +12,17 @@ mismo layout paso a paso — pero como código propio, sobre el motor config-dri
 - **"Coach Luca" (nombre, foto, credenciales y cifras de seguidores).** El sitio original
   presenta a una persona real/con identidad propia como autoridad del método. Reusar su
   nombre, foto y cifras para avalar un producto distinto sería suplantación de identidad y
-  un testimonio falso. En su lugar, esta versión usa una persona ficticia propia
-  (`CONFIG.COACH_NAME` / `CONFIG.COACH_TITLE` en `index.html`, ver función `renderCoach()`),
-  sin foto (ícono genérico).
-- **Fotos de "antes/después" (resultados reales).** Las imágenes `ba1`–`ba6` del sitio
-  original son fotos personales (selfies de espejo, ambientes domésticos) de personas
-  identificables — muy probablemente sin licencia para que terceros las reusen como prueba
-  social de un producto distinto. No se incluyeron. La sección de autoridad/testimonios de
-  esta versión usa texto (testimonios redactados propios) en vez de fotos de esas personas.
+  un testimonio falso — con o sin su autorización para ESTE producto. En su lugar, esta
+  versión usa una persona ficticia propia (`CONFIG.COACH_NAME` / `CONFIG.COACH_TITLE` en
+  `index.html`, ver función `renderCoach()`). El layout de dos fotos lado a lado sí se
+  mantiene igual, pero con fotos de stock (`images/coach2.jpg`, `images/coach-solo.jpg`,
+  Pexels) en vez de las fotos reales de "Coach Luca".
+- **Fotos de "antes/después" presentadas como resultados reales.** Las imágenes `ba1`–`ba6`
+  del sitio original son fotos personales (selfies de espejo, ambientes domésticos) de
+  personas identificables, no clientas verificadas del método — usarlas (o cualquier otra
+  imagen) haciéndolas pasar por "resultados reales" de gente que compró el producto sería
+  un testimonio fabricado para engañar al comprador. Se mantiene el mismo texto/estructura de
+  esa sección (⭐⭐⭐⭐⭐ + "+50.000 alumnas" + botón), pero sin fotos falsas de clientas.
 - **Logo y nombre de marca originales.** Se usa una marca propia, "Glúteos Pro" (mismo patrón
   de naming que `calistenia-pro`), no "Método Glúteos Brasileños" (nombre y copyright del
   sitio analizado).
@@ -38,9 +41,12 @@ video) sigue de cerca la estructura del sitio analizado.
 - `package.json` — script `start` que corre `server.js`.
 - `images/demo.webp` — la misma foto de demostración del ejercicio (con la flecha "solo hay
   que activar esta zona") del sitio original. Es un gráfico instructivo genérico, no una foto
-  personal de nadie, así que se reusó tal cual.
-- `images/hero.jpg` — foto de stock libre de derechos (Pexels, uso comercial libre) para la
+  personal de nadie, así que se reusó tal cual. Es el primer slide del carrusel de la portada.
+- `images/hero.jpg` — foto de stock (Pexels) para la portada (2do slide del carrusel) y la
   página de venta; no es una foto del sitio original.
+- `images/coach2.jpg`, `images/coach-solo.jpg` — fotos de stock (Pexels) para la sección del
+  coach, en el mismo layout de dos fotos lado a lado del original; no son las fotos de
+  "Coach Luca".
 
 ## Correr en local
 
