@@ -303,8 +303,15 @@
 #sp .sp-car-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.55);cursor:pointer;box-shadow:0 0 0 1px rgba(0,0,0,.15)}
 #sp .sp-car-dot.on{background:var(--bronze2)}
 
+/* Pantallas "full-bleed": tapan TODA la pantalla (no solo la tarjeta de
+   520px), para que en PC no se vea un corte entre el fondo de color y el
+   blanco de los costados — en celular ya ocupan la pantalla completa por
+   sí solas. .sp-fb-inner limita el contenido a una columna legible. */
+#sp .sp-fb{position:fixed;inset:0;z-index:40;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:32px 18px 48px}
+#sp .sp-fb-inner{max-width:560px;margin:0 auto}
+
 /* Gate de video: fondo degradé vivo (igual al del sitio analizado en ese paso puntual) */
-#sp .sp-videogate{margin:-24px -18px -42px;padding:32px 18px 42px;min-height:calc(84vh - 26px);background:linear-gradient(160deg,#7C3AED 0%,#C026A3 55%,#FF2D87 100%);color:#fff}
+#sp .sp-videogate{background:linear-gradient(160deg,#7C3AED 0%,#C026A3 55%,#FF2D87 100%);color:#fff}
 #sp .sp-videogate .sp-sub{color:rgba(255,255,255,.92);font-size:16px;font-weight:600;max-width:320px;margin:0 auto}
 
 /* Banner "DESAFÍO GLÚTEOS PRO" arriba de algunas preguntas (mismo recurso
@@ -315,7 +322,7 @@
 #sp .sp-qbanner-lab .am{color:var(--bronze2)}
 
 /* Pantalla "trasero tímido" (fondo oscuro, igual al sitio analizado) */
-#sp .sp-tt{margin:-26px -18px -4px;padding:28px 18px 36px;min-height:calc(84vh - 26px);background:#1A0F2E;color:#fff}
+#sp .sp-tt{background:#1A0F2E;color:#fff}
 #sp .sp-tt .sp-h{color:#fff;font-size:23px}
 #sp .sp-tt-badge{display:flex;align-items:center;gap:6px;width:max-content;margin:0 auto 16px;padding:7px 16px;background:rgba(255,45,135,.16);border:1px solid rgba(255,45,135,.4);border-radius:20px;font-family:'Oswald';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#FF6FB0}
 #sp .sp-tt-card{background:#241640;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px;margin-top:16px}
@@ -335,8 +342,7 @@
 #sp .sp-tt-btn.no{background:linear-gradient(140deg,#EF4444,#B91C1C)}
 
 /* Pantalla "perfil genético" (degradé morado oscuro, igual al sitio analizado) */
-#sp .sp-gp{margin:-26px -18px -4px;padding:34px 18px 40px;min-height:calc(84vh - 26px);
-  background:radial-gradient(500px 320px at 50% -6%, rgba(255,45,135,.18), transparent 60%), linear-gradient(165deg,#1A0F2E,#12081F);color:#fff}
+#sp .sp-gp{background:radial-gradient(500px 320px at 50% -6%, rgba(255,45,135,.18), transparent 60%), linear-gradient(165deg,#1A0F2E,#12081F);color:#fff}
 #sp .sp-gp-icon{width:60px;height:60px;margin:0 auto 14px;border-radius:50%;background:rgba(255,45,135,.14);border:1.5px solid var(--bronze2);box-shadow:0 0 22px rgba(255,45,135,.35);display:flex;align-items:center;justify-content:center;font-size:26px}
 #sp .sp-gp-tag{text-align:center;font-family:'Oswald';font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#FF8FC4;margin-bottom:6px}
 #sp .sp-gp-h{text-align:center;font-family:'Oswald';font-weight:800;font-size:26px;line-height:1.2;margin-bottom:18px}
@@ -874,7 +880,7 @@ function render(){
 // lleva al mismo resultado: el "perfil genético".
 function renderTrasTimido(){
   stage.style.padding='0';
-  stage.innerHTML='<div class="sp-tt">'+
+  stage.innerHTML='<div class="sp-tt sp-fb"><div class="sp-fb-inner">'+
     '<div class="sp-tt-badge">⚠️ Información importante</div>'+
     '<h1 class="sp-h" style="color:#fff">¿Por qué entrenás duro y tu trasero no <span class="am">reacciona</span>?</h1>'+
     '<div class="sp-tt-card">'+
@@ -889,7 +895,7 @@ function renderTrasTimido(){
     '<div class="sp-tt-btns">'+
       '<button class="sp-tt-btn yes" id="spTtYes">✅<br>Ya lo sabía</button>'+
       '<button class="sp-tt-btn no" id="spTtNo">❌<br>¡No lo sabía!</button>'+
-    '</div></div>';
+    '</div></div></div>';
   document.getElementById('spTtYes').onclick=renderGeneticProfile;
   document.getElementById('spTtNo').onclick=renderGeneticProfile;
 }
@@ -900,7 +906,7 @@ function renderTrasTimido(){
 function renderGeneticProfile(){
   var edad=state.answers.edad||'18 - 29';
   stage.style.padding='0';
-  stage.innerHTML='<div class="sp-gp">'+
+  stage.innerHTML='<div class="sp-gp sp-fb"><div class="sp-fb-inner">'+
     '<div class="sp-gp-icon">🎯</div>'+
     '<p class="sp-gp-tag">Tu perfil genético · analizado</p>'+
     '<h1 class="sp-gp-h"><span class="am2">¡Análisis</span><br>Completado! ✨</h1>'+
@@ -918,7 +924,7 @@ function renderGeneticProfile(){
     '<p style="text-align:center;color:#fff;font-weight:800;margin-bottom:18px">¡Tu resultado fue sorprendente! 🎉</p>'+
     '<button class="sp-gp-cta" id="spGpNext">🔥 Continuar mi transformación →</button>'+
     '<p style="text-align:center;color:rgba(255,255,255,.6);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;margin-top:14px">🔒 Análisis seguro · Sin compromiso · Gratuito</p>'+
-    '</div>';
+    '</div></div>';
   document.getElementById('spGpNext').onclick=function(){ go(state.i+1); };
 }
 
@@ -1008,11 +1014,11 @@ function renderCoach(){
 // Gate de video (placeholder hasta tener el video real) con botón para
 // saltarlo y pasar directo a la oferta.
 function renderVideoGate(){
-  stage.style.padding='24px 18px 42px';
-  stage.innerHTML='<div class="sp-videogate">'+
+  stage.style.padding='0';
+  stage.innerHTML='<div class="sp-videogate sp-fb"><div class="sp-fb-inner">'+
     '<p class="sp-sub">Tu video ha comenzado, mirálo y desbloqueá el plan.</p>'+
     '<div class="sp-video-box">🎥<span>Video próximamente<br>(placeholder)</span></div>'+
-    '<button class="sp-cta" id="spSkipVideo" style="margin-top:20px">Pasar sin video →</button></div>';
+    '<button class="sp-cta" id="spSkipVideo" style="margin-top:20px">Pasar sin video →</button></div></div>';
   document.getElementById('spSkipVideo').onclick=renderSale;
 }
 
