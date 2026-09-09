@@ -62,9 +62,12 @@ Abrí `http://localhost:3000`.
 - **Checkout real:** el botón "QUIERO MI TRANSFORMACIÓN AHORA" apunta a `#` (placeholder).
   Conectá `STORE` en el bloque `CONFIG` de `index.html` (Shopify, Stripe, etc.) cuando tengas
   la tienda lista.
-- **Video de venta (VSL):** todavía no hay video real — se ve un placeholder con botón
-  "Pasar sin video →" que lleva directo a la oferta (función `renderVideoGate()` en
-  `index.html`). Cuando tengan el video, reemplazá el bloque `sp-video-box` por el embed real.
+- **Video de venta (VSL):** ya conectado (cuenta y player propios de VTurb/ConverteAI en
+  `CONFIG.VSL` dentro de `index.html`). Cerca del final del video (`ctaDelaySec`, hoy en 45s)
+  aparece la caja verde "Obtener Glúteos 🍑" que lleva directo a la sección de precio de la
+  oferta (`renderVideoGate()` / `goToPricing()`). Ajustá `ctaDelaySec` a la duración real del
+  video cuando la sepan con precisión. El botón chico "Pasar sin video →" sigue disponible
+  como salida alternativa.
 - **Meta Pixel / Utmify:** todavía no conectados (ver placeholders en el `<head>`). Cuando
   tengan el Pixel ID, agregá el snippet estándar y seteá `META_PIXEL_ID` +
   `META_ACCESS_TOKEN` como variables de entorno en Railway para activar también el envío
