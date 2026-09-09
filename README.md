@@ -79,6 +79,11 @@ Abrí `http://localhost:3000`.
   conseguí o generá fotos propias (no reusar las de gluteosappbrazil.site).
 - **Precio:** el plan único ($9.90, antes $97) replica el del funnel analizado — ajustalo si
   cambia.
+- **Contenido visual extra de la oferta:** el sitio original también tiene un mockup de la
+  app (imagen de teléfono) y dos gifs/videos cortos de "antes y después" en la página de
+  oferta — no se incluyeron (mismo criterio que las fotos de antes/después: son piezas que
+  habría que producir propias, no reusar las del sitio original). Si quieren ese nivel de
+  detalle, conseguí/generá esas piezas y agregalas en `renderSale()`.
 
 ## Editar el quiz
 Todo el contenido (marca, precio, pasos del quiz, testimonios, bonos, FAQ) vive en el bloque

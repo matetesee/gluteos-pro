@@ -220,6 +220,13 @@
 #sp .sp-faq .a{max-height:0;overflow:hidden;transition:max-height .25s ease;color:var(--soft);font-size:13.5px;line-height:1.55}
 #sp .sp-faq .it.open .a{max-height:260px;padding-bottom:14px}
 #sp .sp-disc{font-size:10.5px;color:#666;text-align:center;margin-top:18px;line-height:1.5}
+#sp .sp-slots{display:flex;gap:6px;justify-content:center}
+#sp .sp-slots span{flex:1;text-align:center;padding:8px 4px;border-radius:8px;font-family:'Oswald';font-weight:700;font-size:10.5px;letter-spacing:.04em}
+#sp .sp-slots .taken{background:var(--card);color:var(--soft);text-decoration:line-through}
+#sp .sp-slots .free{background:rgba(34,197,94,.14);color:#16A34A}
+#sp .sp-footer{text-align:center;padding:22px 18px 30px;border-top:1px solid var(--line);margin-top:10px}
+#sp .sp-footer a{color:var(--soft);text-decoration:underline}
+#sp .sp-footer p{font-size:11px;color:var(--soft);line-height:1.7;margin:0}
 #sp .sp-auth{text-align:center;margin:24px 0}
 #sp .sp-laurel{font-family:'Oswald';font-weight:800;font-size:36px;color:var(--bronze2);display:flex;align-items:center;justify-content:center;gap:10px}
 #sp .sp-laurel .lf{opacity:.85;font-size:30px}
@@ -1098,7 +1105,10 @@ function renderSale(){
   var how=(CONFIG.HOW||[]).map(function(s){return '<div class="st"><div class="num">'+esc(s.n)+'</div><div><b>'+esc(s.t)+'</b><p>'+esc(s.d)+'</p></div></div>';}).join('');
   var howSec=how?'<div class="sp-sec"><h2 class="sp-sec-h">El <span class="am">camino</span></h2><div class="sp-how">'+how+'</div></div>':'';
   var bonuses=(CONFIG.BONUSES||[]).map(function(x){return '<li><span class="ck">🎁</span><span><b>'+esc(x.t)+'</b> — '+esc(x.d)+' <span style="color:var(--soft)">(valor '+esc(x.value)+')</span></span></li>';}).join('');
-  var bonusSec=bonuses?'<div class="sp-sec"><h2 class="sp-sec-h">Bonos <span class="am">exclusivos</span></h2><ul class="sp-incl">'+bonuses+'</ul></div>':'';
+  var slots='<div class="sp-slots"><span class="taken">TOMADO</span><span class="taken">TOMADO</span><span class="taken">TOMADO</span><span class="free">LIBRE</span><span class="free">LIBRE</span></div>';
+  var bonusSec=bonuses?'<div class="sp-sec"><h2 class="sp-sec-h">Bonos <span class="am">exclusivos</span></h2>'+
+    '<p style="text-align:center;font-weight:700;color:var(--crimson2);font-size:13px;margin-bottom:10px">¡Solo quedan 2 cupos con acceso a los bonos!</p>'+
+    slots+'<ul class="sp-incl" style="margin-top:14px">'+bonuses+'</ul></div>':'';
   var tst=(CONFIG.TESTIMONIALS||[]).map(function(x){return '<div class="c"><div class="stars">★★★★★</div><p class="q">"'+esc(x.text)+'"</p><div class="who"><b>'+esc(x.name)+'</b><span class="res">'+esc(x.result)+'</span></div></div>';}).join('');
   var tstSec=tst?'<div class="sp-sec"><h2 class="sp-sec-h">Historias <span class="am">reales</span></h2><div class="sp-tst">'+tst+'</div></div>':'';
   var faq=(CONFIG.FAQ||[]).map(function(x){return '<div class="it"><button class="q">'+esc(x.q)+'</button><div class="a">'+esc(x.a)+'</div></div>';}).join('');
@@ -1124,7 +1134,10 @@ function renderSale(){
     authority + tstSec + faqSec +
     '<div class="sp-proof"><b>+12.400 mujeres</b> ya empezaron su transformación este mes</div>'+
     '<p class="sp-disc">*Resultados ilustrativos, no garantizados. Los resultados individuales varían según constancia, alimentación y metabolismo. Consultá a un profesional de la salud antes de empezar cualquier programa de ejercicio.</p>'+
-    '</div></div>';
+    '</div>'+
+    '<div class="sp-footer"><p><a href="#">Términos de uso</a> · <a href="#">Política de privacidad</a><br>'+
+    '🔒 Pago 100% seguro · Garantía de 45 días<br>Copyright '+new Date().getFullYear()+' © '+brand+'. Todos los derechos reservados.</p></div>'+
+    '</div>';
 
   function paint(){ stage.querySelectorAll('.sp-tier').forEach(function(el){ el.classList.toggle('sel',+el.dataset.i===state.tier); }); upd(); }
   function checkoutUrlWithParams(){
