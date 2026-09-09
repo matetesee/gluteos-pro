@@ -1070,8 +1070,23 @@ function renderVideoGate(){
     s.src='https://scripts.converteai.net/'+vsl.accountId+'/players/'+vsl.embedId+'/v4/player.js'; s.async=true;
     document.head.appendChild(s);
   }
-  var showAtMs=Math.max(0, ((vsl.durationSec||822)-(vsl.ctaLeadSec||15)))*1000;
-  setTimeout(function(){ var el=document.getElementById('spVslActions'); if(el) el.style.display='block'; }, showAtMs);
+  // El video NO arranca solo (el navegador exige un click para reproducir
+  // audio) — si contamos los ctaLeadSec desde que carga la pantalla en vez
+  // de desde que la persona realmente apreta play, el botón se desincroniza
+  // del video real (aparece tarde si tardan en arrancarlo). Por eso:
+  // arrancamos la cuenta regresiva recién en el primer click sobre el
+  // player. Si por lo que sea nunca detectamos ese click (autoplay ya
+  // andaba, o algún navegador raro), un fallback arranca la cuenta a los
+  // 20s igual, para no dejar a nadie esperando para siempre.
+  var timerStarted=false;
+  function startCountdown(){
+    if(timerStarted) return; timerStarted=true;
+    var showAtMs=Math.max(0, ((vsl.durationSec||822)-(vsl.ctaLeadSec||15)))*1000;
+    setTimeout(function(){ var el=document.getElementById('spVslActions'); if(el) el.style.display='block'; }, showAtMs);
+  }
+  var playerEl=document.getElementById('vid-'+vsl.embedId);
+  if(playerEl) playerEl.addEventListener('click', startCountdown, {once:true});
+  setTimeout(startCountdown, 20000);
   document.getElementById('spVslBuy').onclick=goToPricing;
   document.getElementById('spSkipVideo').onclick=renderSale;
 }

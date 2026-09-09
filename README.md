@@ -65,11 +65,17 @@ Abrí `http://localhost:3000`.
 - **Video de venta (VSL):** ya conectado (cuenta y player propios de VTurb/ConverteAI en
   `CONFIG.VSL` dentro de `index.html`). Ni "Obtener Glúteos 🍑" ni "Pasar sin video" se ven
   durante el video — los dos aparecen juntos recién en `durationSec - ctaLeadSec` (hoy
-  822s - 15s, para un video de 13:42). **Importante:** no pudimos engancharnos al tiempo real
-  de reproducción del player — el `<video>` interno vive en shadow DOM cerrado y su barra de
-  progreso es una "fakeBar" (así la llama la config del propio player, no representa el
-  tiempo real) — así que esto es un timer fijo de página, no algo atado al video en sí. Si
-  cambian el video, actualizá `durationSec` en `CONFIG.VSL` a la nueva duración real.
+  822s - 15s = 807s, confirmado leyendo el manifiesto HLS real del video, no una estimación).
+  **Importante:** no pudimos engancharnos al tiempo real de reproducción del player — el
+  `<video>` interno vive en shadow DOM cerrado y su barra de progreso es una "fakeBar" (así la
+  llama la config del propio player, no representa el tiempo real) — así que esto sigue
+  siendo un timer, no algo atado directamente al video. La cuenta regresiva arranca recién en
+  el primer click sobre el player (no desde que carga la pantalla), porque el video no
+  arranca solo — el navegador exige un click para reproducir con audio. Si el video tarda en
+  reproducirse (conexión lenta, etc.) y nunca detectamos ese click, un fallback arranca la
+  cuenta a los 20s de todos modos para no dejar a nadie esperando para siempre. Si cambian el
+  video, actualizá `durationSec` en `CONFIG.VSL` a la nueva duración real (podés confirmarla
+  leyendo el manifiesto .m3u8, sumando los `#EXTINF` — así se verificó 822.15s en este video).
 - **Meta Pixel / Utmify:** todavía no conectados (ver placeholders en el `<head>`). Cuando
   tengan el Pixel ID, agregá el snippet estándar y seteá `META_PIXEL_ID` +
   `META_ACCESS_TOKEN` como variables de entorno en Railway para activar también el envío
