@@ -2,9 +2,12 @@
 
 Quiz funnel de venta para un programa de entrenamiento de glúteos (nicho fitness femenino),
 reconstruido a partir del ángulo de mercado, la estructura y el diseño de
-[gluteosappbrazil.site](https://gluteosappbrazil.site) — mismo flujo de portada + coach + 13 preguntas + perfil + gate de video + oferta con bonos y
-garantía, misma paleta blanco/rosa, mismo layout paso a paso — pero como código propio, sobre
-el motor config-driven ya usado en `calistenia-pro`.
+[gluteosappbrazil.site](https://gluteosappbrazil.site) — mismo flujo paso a paso: portada →
+coach → preguntas 1-9 → pantalla "trasero tímido" (elegís ✅/❌) → perfil genético (96/100 fijo,
+botón verde titilante) → preguntas 10-13 (con banner "Desafío Glúteos Pro" en la 11 y la 13) →
+loader final → gate de video → oferta con bonos y garantía. Misma paleta blanco/rosa (y el
+degradé morado/rosa vivo en las pantallas puntuales que lo llevan) — pero como código propio,
+sobre el motor config-driven ya usado en `calistenia-pro`.
 
 ## Qué NO se copió tal cual del sitio analizado (y por qué)
 

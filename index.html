@@ -306,6 +306,55 @@
 /* Gate de video: fondo degradé vivo (igual al del sitio analizado en ese paso puntual) */
 #sp .sp-videogate{margin:-24px -18px -42px;padding:32px 18px 42px;min-height:calc(84vh - 26px);background:linear-gradient(160deg,#7C3AED 0%,#C026A3 55%,#FF2D87 100%);color:#fff}
 #sp .sp-videogate .sp-sub{color:rgba(255,255,255,.92);font-size:16px;font-weight:600;max-width:320px;margin:0 auto}
+
+/* Banner "DESAFÍO GLÚTEOS PRO" arriba de algunas preguntas (mismo recurso
+   que el sitio analizado: la foto de portada reusada como banner) */
+#sp .sp-qbanner{position:relative;max-width:220px;margin:0 auto 14px;border-radius:12px;overflow:hidden;border-bottom:5px solid var(--bronze2)}
+#sp .sp-qbanner img{width:100%;display:block}
+#sp .sp-qbanner-lab{position:absolute;top:8px;left:8px;color:#fff;font-family:'Oswald';font-weight:800;font-size:12px;line-height:1.25;text-transform:uppercase;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+#sp .sp-qbanner-lab .am{color:var(--bronze2)}
+
+/* Pantalla "trasero tímido" (fondo oscuro, igual al sitio analizado) */
+#sp .sp-tt{margin:-26px -18px -4px;padding:28px 18px 36px;min-height:calc(84vh - 26px);background:#1A0F2E;color:#fff}
+#sp .sp-tt .sp-h{color:#fff;font-size:23px}
+#sp .sp-tt-badge{display:flex;align-items:center;gap:6px;width:max-content;margin:0 auto 16px;padding:7px 16px;background:rgba(255,45,135,.16);border:1px solid rgba(255,45,135,.4);border-radius:20px;font-family:'Oswald';font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#FF6FB0}
+#sp .sp-tt-card{background:#241640;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px;margin-top:16px}
+#sp .sp-tt-hi{background:rgba(255,45,135,.10);border-left:4px solid var(--bronze2);border-radius:10px;padding:12px 14px}
+#sp .sp-tt-hi.good{background:rgba(34,197,94,.10);border-left-color:#22C55E}
+#sp .sp-tt-hi > b{display:block;color:#fff;font-size:14.5px;margin-bottom:4px}
+#sp .sp-tt-hi.good > b{color:#4ADE80}
+#sp .sp-tt-hi p b{color:#fff}
+#sp .sp-tt-hi p{color:rgba(255,255,255,.8);font-size:13px;line-height:1.5;margin:0}
+#sp .sp-tt-p{color:rgba(255,255,255,.85);font-size:14px;line-height:1.55;margin-top:14px}
+#sp .sp-tt-p b{color:#fff}
+#sp .sp-tt .am{color:var(--bronze2)}
+#sp .sp-tt-btns{display:flex;gap:12px;margin-top:22px}
+#sp .sp-tt-btn{flex:1;padding:16px 8px;border:none;border-radius:13px;color:#fff;font-family:'Oswald';font-weight:700;text-transform:uppercase;font-size:13px;line-height:1.5;cursor:pointer;transition:transform .15s,filter .2s}
+#sp .sp-tt-btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
+#sp .sp-tt-btn.yes{background:linear-gradient(140deg,#22C55E,#16A34A)}
+#sp .sp-tt-btn.no{background:linear-gradient(140deg,#EF4444,#B91C1C)}
+
+/* Pantalla "perfil genético" (degradé morado oscuro, igual al sitio analizado) */
+#sp .sp-gp{margin:-26px -18px -4px;padding:34px 18px 40px;min-height:calc(84vh - 26px);
+  background:radial-gradient(500px 320px at 50% -6%, rgba(255,45,135,.18), transparent 60%), linear-gradient(165deg,#1A0F2E,#12081F);color:#fff}
+#sp .sp-gp-icon{width:60px;height:60px;margin:0 auto 14px;border-radius:50%;background:rgba(255,45,135,.14);border:1.5px solid var(--bronze2);box-shadow:0 0 22px rgba(255,45,135,.35);display:flex;align-items:center;justify-content:center;font-size:26px}
+#sp .sp-gp-tag{text-align:center;font-family:'Oswald';font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#FF8FC4;margin-bottom:6px}
+#sp .sp-gp-h{text-align:center;font-family:'Oswald';font-weight:800;font-size:26px;line-height:1.2;margin-bottom:18px}
+#sp .sp-gp-h .am2{color:#FF6FB0;font-style:italic;font-weight:700}
+#sp .sp-gp-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:14px 16px;margin-bottom:6px}
+#sp .sp-gp-card .am2{color:#FF6FB0}
+#sp .sp-gp-row{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:12px 14px;margin-top:10px}
+#sp .sp-gp-ic{width:34px;height:34px;flex:none;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px}
+#sp .sp-gp-ic.o{background:rgba(251,146,60,.18)} #sp .sp-gp-ic.b{background:rgba(56,189,248,.18)} #sp .sp-gp-ic.p{background:rgba(255,45,135,.18)}
+#sp .sp-gp-rt{flex:1;min-width:0}
+#sp .sp-gp-rt b{display:block;font-size:13.5px;font-weight:700;text-decoration:underline;text-decoration-color:rgba(255,255,255,.35)}
+#sp .sp-gp-pill{display:inline-block;font-family:'Oswald';font-weight:700;font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;padding:2px 9px;border-radius:20px;margin-bottom:4px}
+#sp .sp-gp-pill.o{background:rgba(251,146,60,.22);color:#FB923C} #sp .sp-gp-pill.b{background:rgba(56,189,248,.22);color:#38BDF8} #sp .sp-gp-pill.p{background:rgba(255,45,135,.22);color:#FF6FB0}
+#sp .sp-gp-pct{font-family:'Oswald';font-weight:800;font-size:15px;color:#fff;flex:none}
+#sp .sp-gp-score{text-align:center;font-family:'Oswald';font-weight:800;font-size:46px;color:#FF2D87;margin:22px 0 6px;text-shadow:0 0 26px rgba(255,45,135,.5)}
+#sp .sp-gp-score span{font-size:20px;color:rgba(255,255,255,.6)}
+#sp .sp-gp-cta{display:block;width:100%;padding:17px;border:none;border-radius:13px;background:#22C55E;color:#fff;font-family:'Oswald';font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:15px;cursor:pointer;animation:spGpPulse 1.6s ease-in-out infinite}
+@keyframes spGpPulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.55)}50%{box-shadow:0 0 0 12px rgba(34,197,94,0)}}
 </style>
 
 <script>
@@ -556,18 +605,15 @@ var CONFIG = {
       {t:"📅 3 veces"},{t:"🔥 4 a 5 veces"},{t:"💪 Todos los días"}] },
     { type:"cards", key:"comidas", phase:"Cuestionario", h:"¿Cuántas comidas hacés al día normalmente?", sub:"Esta es la clave de tu metabolismo: la mayoría lo hace mal y por eso no logra ver cambios.", cols:1, opts:[
       {t:"😴 1 a 2 comidas"},{t:"🍽️ 3 comidas básicas al día"},{t:"✅ 4 a 5 comidas"},{t:"🍿 Como varias veces al día"}] },
-    { type:"cards", key:"edad", phase:"Cuestionario", h:"¿Cuál es tu edad?", cols:2, opts:[
+    { type:"cards", key:"edad", phase:"Cuestionario", after:"genetic", h:"¿Cuál es tu edad?", cols:2, opts:[
       {t:"18 - 29"},{t:"30 - 39"},{t:"40 - 49"},{t:"50+"}] },
-    { type:"inter", phase:"Información importante", icon:"⚠️", h:"¿Por qué entrenás duro y tu trasero no <span class='am'>reacciona</span>?",
-      body:"En muchos cuerpos, el glúteo se \"desactiva\" y el esfuerzo se transfiere a la zona lumbar y los muslos: el entrenamiento cansa, pero no levanta. No es falta de esfuerzo — es un problema de activación. La buena noticia: esto puede reprogramarse sin gimnasio y sin peso pesado, con el protocolo de activación de Glúteos Pro.",
-      quote:"SIN GIMNASIO · SIN PESO PESADO · SOLO ACTIVACIÓN" },
     { type:"cards", key:"lista", phase:"Cuestionario", h:"¿Creés que estás lista para transformar tu cuerpo y tu autoestima de una vez por todas?", cols:1, opts:[
       {t:"💪 Sí, estoy lista"},{t:"🙌 Casi lo tengo, solo necesito un empujón"},{t:"🌱 Necesito más motivación para empezar"}] },
-    { type:"cards", key:"objetivo", phase:"Cuestionario", h:"¿Cuál de estos objetivos soñás con alcanzar?", cols:1, opts:[
+    { type:"cards", key:"objetivo", phase:"Cuestionario", banner:true, h:"¿Cuál de estos objetivos soñás con alcanzar?", cols:1, opts:[
       {t:"🍑 Levantado — para llamar la atención desde lejos"},{t:"💪 Esculpido — con curvas marcadas"},{t:"🔥 Musculoso — definido y poderoso"},{t:"✨ Redondito — con volumen y forma"}] },
     { type:"cards", key:"obstaculo", phase:"Cuestionario", h:"¿Cuál es tu mayor obstáculo actual?", sub:"Conocer tu freno interno es clave para vencerlo.", cols:1, opts:[
       {t:"😔 Falta de motivación constante"},{t:"🍫 Ansiedad y compulsión alimentaria"},{t:"⏰ Rutina agitada sin tiempo"},{t:"❓ No sé por dónde empezar"},{t:"💔 La baja autoestima me sabotea"}] },
-    { type:"cards", key:"compromiso", phase:"Cuestionario", h:"¿Estás lista para levantar tu trasero en hasta 28 días?", cols:1, opts:[
+    { type:"cards", key:"compromiso", phase:"Cuestionario", banner:true, h:"¿Estás lista para levantar tu trasero en hasta 28 días?", cols:1, opts:[
       {t:"🔥 Sí, estoy 100% comprometida"},{t:"💪 Absolutamente, daré todo lo que tengo"},{t:"🚀 Con todo, quiero empezar hoy"},{t:"🤔 Todavía estoy pensando"}] }
   ]
 };
@@ -744,6 +790,7 @@ function render(){
   updateBack();
   if(state.i>=TOTAL) return runLoader();
   var s=STEPS[state.i], html='';
+  if(s.banner) html+='<div class="sp-qbanner"><img src="images/hero.jpg" alt=""><div class="sp-qbanner-lab">DESAFÍO<br><span class="am">GLÚTEOS PRO</span></div></div>';
   if(s.type!=='inter') html+=metaBlock();
   if(s.h) html+='<h1 class="sp-h">'+s.h+'</h1>';
   if(s.sub) html+='<p class="sp-sub">'+esc(s.sub)+'</p>';
@@ -761,7 +808,7 @@ function render(){
       if(c.classList.contains('sel'))return; stage.querySelectorAll('.sp-card').forEach(function(x){x.classList.remove('sel');});
       c.classList.add('sel'); state.answers[s.key||state.i]=s.opts[c.dataset.i].t;
       navigator.vibrate&&navigator.vibrate(10);
-      setTimeout(function(){ go(state.i+1); },280); }; });
+      setTimeout(function(){ if(s.after==='genetic'){ renderTrasTimido(); } else { go(state.i+1); } },280); }; });
     return;
   }
   if(s.type==='multi'||s.type==='empathy'){
@@ -819,6 +866,60 @@ function render(){
     nx.onclick=function(){ if(s.key) state.answers[s.key]=inp.value.trim(); go(state.i+1); };
     return;
   }
+}
+
+// Pantalla intermedia "¿Por qué entrenás duro y tu trasero no reacciona?"
+// (mismo diseño oscuro que el sitio analizado en este paso puntual, justo
+// después de la pregunta de edad). Elegir cualquiera de las dos opciones
+// lleva al mismo resultado: el "perfil genético".
+function renderTrasTimido(){
+  stage.style.padding='0';
+  stage.innerHTML='<div class="sp-tt">'+
+    '<div class="sp-tt-badge">⚠️ Información importante</div>'+
+    '<h1 class="sp-h" style="color:#fff">¿Por qué entrenás duro y tu trasero no <span class="am">reacciona</span>?</h1>'+
+    '<div class="sp-tt-card">'+
+      '<div class="sp-tt-hi"><b>El 95% de las mujeres +30 tienen "trasero tímido"</b>'+
+      '<p>El cuerpo desactiva el glúteo central y transfiere el esfuerzo a la lumbar y los muslos.</p></div>'+
+      '<p class="sp-tt-p">Resultado: tu entrenamiento <b>cansa, pero no levanta</b>. No es falta de esfuerzo — es un problema de activación.</p>'+
+    '</div>'+
+    '<div class="sp-tt-card">'+
+      '<div class="sp-tt-hi good"><b>✅ La buena noticia:</b>'+
+      '<p>Esto <b class="am">puede reprogramarse por completo</b> sin gimnasio y sin peso pesado — con el protocolo que llamo el <b class="am">Método Glúteos Pro</b>.</p></div>'+
+    '</div>'+
+    '<div class="sp-tt-btns">'+
+      '<button class="sp-tt-btn yes" id="spTtYes">✅<br>Ya lo sabía</button>'+
+      '<button class="sp-tt-btn no" id="spTtNo">❌<br>¡No lo sabía!</button>'+
+    '</div></div>';
+  document.getElementById('spTtYes').onclick=renderGeneticProfile;
+  document.getElementById('spTtNo').onclick=renderGeneticProfile;
+}
+
+// "Perfil genético analizado" (mismo diseño que el sitio analizado): usa la
+// edad recién respondida, muestra siempre 96/100 y termina en un botón
+// verde titilante que continúa el cuestionario (preguntas 10 a 13).
+function renderGeneticProfile(){
+  var edad=state.answers.edad||'18 - 29';
+  stage.style.padding='0';
+  stage.innerHTML='<div class="sp-gp">'+
+    '<div class="sp-gp-icon">🎯</div>'+
+    '<p class="sp-gp-tag">Tu perfil genético · analizado</p>'+
+    '<h1 class="sp-gp-h"><span class="am2">¡Análisis</span><br>Completado! ✨</h1>'+
+    '<div class="sp-gp-card">'+
+      '<p class="sp-gp-tag" style="text-align:left;margin-bottom:6px">Perfil genético detectado</p>'+
+      '<p style="font-weight:800;font-size:16px;margin-bottom:6px">'+esc(edad)+' años → Resultado <span class="am2">ELITE</span> 🏆</p>'+
+      '<p style="color:rgba(255,255,255,.75);font-size:13.5px">Predisposición genética para transformarse rápido. ✅</p>'+
+    '</div>'+
+    '<p class="sp-gp-tag" style="margin:18px 0 10px">Tu plan · 30 días</p>'+
+    '<div class="sp-gp-row"><span class="sp-gp-ic o">🔥</span><div class="sp-gp-rt"><span class="sp-gp-pill o">7 días</span><b>Tu trasero se pone firme y duro</b></div><span class="sp-gp-pct">20%</span></div>'+
+    '<div class="sp-gp-row"><span class="sp-gp-ic b">💎</span><div class="sp-gp-rt"><span class="sp-gp-pill b">21 días</span><b>Ruptura de células de celulitis</b></div><span class="sp-gp-pct">50%</span></div>'+
+    '<div class="sp-gp-row"><span class="sp-gp-ic p">🍑</span><div class="sp-gp-rt"><span class="sp-gp-pill p">30 días</span><b>Trasero levantado y voluminoso</b></div><span class="sp-gp-pct">96%</span></div>'+
+    '<div class="sp-gp-score">96<span>/100</span></div>'+
+    '<p style="text-align:center;color:rgba(255,255,255,.85);font-size:13.5px;margin-bottom:16px">Tu plan es <b>96% compatible</b> con tu cuerpo — resultados en días. 🚀</p>'+
+    '<p style="text-align:center;color:#fff;font-weight:800;margin-bottom:18px">¡Tu resultado fue sorprendente! 🎉</p>'+
+    '<button class="sp-gp-cta" id="spGpNext">🔥 Continuar mi transformación →</button>'+
+    '<p style="text-align:center;color:rgba(255,255,255,.6);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;margin-top:14px">🔒 Análisis seguro · Sin compromiso · Gratuito</p>'+
+    '</div>';
+  document.getElementById('spGpNext').onclick=function(){ go(state.i+1); };
 }
 
 // Loader tipo checklist (igual al del funnel original): una lista de pasos
