@@ -63,11 +63,13 @@ Abrí `http://localhost:3000`.
   Conectá `STORE` en el bloque `CONFIG` de `index.html` (Shopify, Stripe, etc.) cuando tengas
   la tienda lista.
 - **Video de venta (VSL):** ya conectado (cuenta y player propios de VTurb/ConverteAI en
-  `CONFIG.VSL` dentro de `index.html`). Cerca del final del video (`ctaDelaySec`, hoy en 45s)
-  aparece la caja verde "Obtener Glúteos 🍑" que lleva directo a la sección de precio de la
-  oferta (`renderVideoGate()` / `goToPricing()`). Ajustá `ctaDelaySec` a la duración real del
-  video cuando la sepan con precisión. El botón chico "Pasar sin video →" sigue disponible
-  como salida alternativa.
+  `CONFIG.VSL` dentro de `index.html`). Ni "Obtener Glúteos 🍑" ni "Pasar sin video" se ven
+  durante el video — los dos aparecen juntos recién en `durationSec - ctaLeadSec` (hoy
+  822s - 15s, para un video de 13:42). **Importante:** no pudimos engancharnos al tiempo real
+  de reproducción del player — el `<video>` interno vive en shadow DOM cerrado y su barra de
+  progreso es una "fakeBar" (así la llama la config del propio player, no representa el
+  tiempo real) — así que esto es un timer fijo de página, no algo atado al video en sí. Si
+  cambian el video, actualizá `durationSec` en `CONFIG.VSL` a la nueva duración real.
 - **Meta Pixel / Utmify:** todavía no conectados (ver placeholders en el `<head>`). Cuando
   tengan el Pixel ID, agregá el snippet estándar y seteá `META_PIXEL_ID` +
   `META_ACCESS_TOKEN` como variables de entorno en Railway para activar también el envío

@@ -561,9 +561,16 @@ var CONFIG = {
 
   // ====== VSL (video de venta) ======
   // Cuenta y player propios de VTurb/ConverteAI para Glúteos Pro.
-  // ctaDelaySec: segundos hasta que aparece la caja "Obtener Glúteos 🍑"
-  // (ajustá este número a la duración real del video cuando lo tengan).
-  VSL: { accountId:"9157edce-5df8-49e3-8088-46683f7b08b6", embedId:"6aa1b17c4229e5d7393bfb49", ctaDelaySec:45 },
+  // durationSec: duración total real del video (13:42 = 822s).
+  // ctaLeadSec: cuántos segundos ANTES de que termine aparecen los botones
+  // "Obtener Glúteos 🍑" y "Pasar sin video" (ninguno de los dos se ve
+  // durante el resto del video — no queremos que se pueda saltar antes).
+  // No pudimos engancharnos al tiempo real de reproducción del player:
+  // el <video> interno vive en shadow DOM cerrado y la barra de progreso
+  // que se ve es una "fakeBar" (así la llama la config del propio player,
+  // no representa el tiempo real) — por eso esto es un timer fijo basado
+  // en durationSec. Si cambian el video, actualizá durationSec acá.
+  VSL: { accountId:"9157edce-5df8-49e3-8088-46683f7b08b6", embedId:"6aa1b17c4229e5d7393bfb49", durationSec:822, ctaLeadSec:15 },
 
   // Imágenes. "landing" es un carrusel: la primera foto es la misma
   // demostración del ejercicio (con la flecha) del sitio analizado — es un
@@ -1029,9 +1036,10 @@ function renderCoach(){
   document.getElementById('spAccess2').onclick=render;
 }
 // Gate de video (VSL). Si CONFIG.VSL.embedId está seteado, incrusta el
-// reproductor de VTurb real; si no, muestra el placeholder. Cerca del
-// final del video (CONFIG.VSL.ctaDelaySec) aparece la caja "Obtener
-// Glúteos 🍑" que lleva directo a la sección de precio de la oferta.
+// reproductor de VTurb real; si no, muestra el placeholder. NINGÚN botón
+// (ni "Obtener Glúteos 🍑" ni "Pasar sin video") se muestra durante el
+// video — recién aparecen juntos cerca del final (durationSec - ctaLeadSec),
+// para que el video convenza antes de ofrecer una salida.
 function renderVideoGate(){
   stage.style.padding='0';
   var vsl=CONFIG.VSL||{};
@@ -1043,19 +1051,20 @@ function renderVideoGate(){
   stage.innerHTML='<div class="sp-videogate sp-fb"><div class="sp-fb-inner">'+
     '<div class="sp-badge" style="margin:0 auto 12px;background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.35);color:#fff">🎯 Acceso exclusivo confirmado</div>'+
     '<h1 class="sp-h" style="color:#fff;font-size:24px">¡Fuiste <span class="am">seleccionada</span>!</h1>'+
-    '<p class="sp-sub">'+esc(vsl.embedId?'Tu video ha comenzado, mirálo y desbloqueá el plan.':'Tu video ha comenzado, mirálo y desbloqueá el plan.')+'</p>'+
+    '<p class="sp-sub">Tu video ha comenzado, mirálo y desbloqueá el plan.</p>'+
     videoHtml+
-    '<div id="spVslCta" style="display:none;margin-top:18px">'+
+    '<div id="spVslActions" style="display:none;margin-top:18px">'+
       '<button class="sp-cta" id="spVslBuy" style="background:#22C55E;animation:spGpPulse 1.6s ease-in-out infinite">Obtener Glúteos 🍑</button>'+
+      '<button class="sp-skip" id="spSkipVideo">Pasar sin video →</button>'+
     '</div>'+
-    '<button class="sp-skip" id="spSkipVideo">Pasar sin video →</button>'+
   '</div></div>';
   if(vsl.embedId && vsl.accountId && !document.getElementById('vturb-script-'+vsl.embedId)){
     var s=document.createElement('script'); s.type='text/javascript'; s.id='vturb-script-'+vsl.embedId;
     s.src='https://scripts.converteai.net/'+vsl.accountId+'/players/'+vsl.embedId+'/v4/player.js'; s.async=true;
     document.head.appendChild(s);
   }
-  setTimeout(function(){ var el=document.getElementById('spVslCta'); if(el) el.style.display='block'; }, (vsl.ctaDelaySec||45)*1000);
+  var showAtMs=Math.max(0, ((vsl.durationSec||822)-(vsl.ctaLeadSec||15)))*1000;
+  setTimeout(function(){ var el=document.getElementById('spVslActions'); if(el) el.style.display='block'; }, showAtMs);
   document.getElementById('spVslBuy').onclick=goToPricing;
   document.getElementById('spSkipVideo').onclick=renderSale;
 }
