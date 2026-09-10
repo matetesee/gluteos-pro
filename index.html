@@ -12,11 +12,30 @@
      oscuros alrededor de la tarjeta del quiz en pantallas anchas (PC). */
   html,body{margin:0;background:#FFFFFF;min-height:100%}
 </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1420771603284350');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1420771603284350&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 <!--
-  Meta Pixel: todavía no conectado (placeholder).
-  Cuando tengas el Pixel ID, pegá acá el snippet estándar de Meta
-  (fbq init + PageView) y agregá META_PIXEL_ID + META_ACCESS_TOKEN en
-  Railway → Variables para activar también el envío server-side en server.js.
+  Para activar también el envío server-side (Conversions API) en server.js,
+  agregá en Railway → Variables:
+    META_PIXEL_ID = 1420771603284350   (no es secreto)
+    META_ACCESS_TOKEN = <tu token>     (ESE sí es secreto, generalo en
+                                         Events Manager → Configuración →
+                                         Conversions API → Generar token)
 -->
 <!--
   Utmify: todavía no conectado. El snippet de calistenia-pro traía un blob
