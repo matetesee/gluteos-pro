@@ -348,8 +348,6 @@ src="https://www.facebook.com/tr?id=1420771603284350&ev=PageView&noscript=1"
 /* Gate de video: fondo degradé vivo (igual al del sitio analizado en ese paso puntual) */
 #sp .sp-videogate{background:linear-gradient(160deg,#7C3AED 0%,#C026A3 55%,#FF2D87 100%);color:#fff}
 #sp .sp-videogate .sp-sub{color:rgba(255,255,255,.92);font-size:16px;font-weight:600;max-width:320px;margin:0 auto}
-#sp .sp-skip{display:block;margin:18px auto 0;background:none;border:none;color:rgba(255,255,255,.7);font-family:'Oswald';font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;padding:6px 10px}
-#sp .sp-skip:hover{color:#fff}
 
 /* Banner "DESAFÍO GLÚTEOS PRO" arriba de algunas preguntas (mismo recurso
    que el sitio analizado: la foto de portada reusada como banner) */
@@ -582,21 +580,19 @@ var CONFIG = {
   BRAND_PLAIN: "Glúteos Pro",
   COACH_NAME: "Coach Bela",              // persona ficticia propia (no "Coach Luca")
   COACH_TITLE: "Especialista en entrenamiento de glúteos",
-  STORE: "", // Checkout / tienda: completar cuando esté lista (Shopify, Stripe, etc.)
+  STORE: "https://gluteospro.impultienda.ar", // Checkout / tienda (ImpulTienda)
   TIMER_MIN: 15,
 
   // ====== VSL (video de venta) ======
   // Cuenta y player propios de VTurb/ConverteAI para Glúteos Pro.
-  // durationSec: duración total real del video (13:42 = 822s).
-  // ctaLeadSec: cuántos segundos ANTES de que termine aparecen los botones
-  // "Obtener Glúteos 🍑" y "Pasar sin video" (ninguno de los dos se ve
-  // durante el resto del video — no queremos que se pueda saltar antes).
+  // ctaShowAtSec: a los cuántos segundos DE REPRODUCCIÓN REAL (contados
+  // desde el click de play, no desde que carga la pantalla) aparece el
+  // botón "Obtener Glúteos 🍑". No se ve antes de eso.
   // No pudimos engancharnos al tiempo real de reproducción del player:
   // el <video> interno vive en shadow DOM cerrado y la barra de progreso
   // que se ve es una "fakeBar" (así la llama la config del propio player,
-  // no representa el tiempo real) — por eso esto es un timer fijo basado
-  // en durationSec. Si cambian el video, actualizá durationSec acá.
-  VSL: { accountId:"9157edce-5df8-49e3-8088-46683f7b08b6", embedId:"6aa1b17c4229e5d7393bfb49", durationSec:822, ctaLeadSec:15 },
+  // no representa el tiempo real) — por eso esto es un timer fijo.
+  VSL: { accountId:"9157edce-5df8-49e3-8088-46683f7b08b6", embedId:"6aa1b17c4229e5d7393bfb49", ctaShowAtSec:40 },
 
   // Imágenes. "landing" es un carrusel: la primera foto es la misma
   // demostración del ejercicio (con la flecha) del sitio analizado — es un
@@ -1062,10 +1058,11 @@ function renderCoach(){
   document.getElementById('spAccess2').onclick=render;
 }
 // Gate de video (VSL). Si CONFIG.VSL.embedId está seteado, incrusta el
-// reproductor de VTurb real; si no, muestra el placeholder. NINGÚN botón
-// (ni "Obtener Glúteos 🍑" ni "Pasar sin video") se muestra durante el
-// video — recién aparecen juntos cerca del final (durationSec - ctaLeadSec),
-// para que el video convenza antes de ofrecer una salida.
+// reproductor de VTurb real; si no, muestra el placeholder. El botón
+// "Obtener Glúteos 🍑" no se ve al arrancar — aparece recién a los
+// ctaShowAtSec segundos de reproducción real. No hay botón para saltar
+// el video: el CTA lleva al mismo lugar (la oferta), así que un segundo
+// botón de "salir" era redundante.
 function renderVideoGate(){
   stage.style.padding='0';
   var vsl=CONFIG.VSL||{};
@@ -1081,7 +1078,6 @@ function renderVideoGate(){
     videoHtml+
     '<div id="spVslActions" style="display:none;margin-top:18px">'+
       '<button class="sp-cta" id="spVslBuy" style="background:#22C55E;animation:spGpPulse 1.6s ease-in-out infinite">Obtener Glúteos 🍑</button>'+
-      '<button class="sp-skip" id="spSkipVideo">Pasar sin video →</button>'+
     '</div>'+
   '</div></div>';
   if(vsl.embedId && vsl.accountId && !document.getElementById('vturb-script-'+vsl.embedId)){
@@ -1090,7 +1086,7 @@ function renderVideoGate(){
     document.head.appendChild(s);
   }
   // El video NO arranca solo (el navegador exige un click para reproducir
-  // audio) — si contamos los ctaLeadSec desde que carga la pantalla en vez
+  // audio) — si contamos los ctaShowAtSec desde que carga la pantalla en vez
   // de desde que la persona realmente apreta play, el botón se desincroniza
   // del video real (aparece tarde si tardan en arrancarlo). Por eso:
   // arrancamos la cuenta regresiva recién en el primer click sobre el
@@ -1100,14 +1096,13 @@ function renderVideoGate(){
   var timerStarted=false;
   function startCountdown(){
     if(timerStarted) return; timerStarted=true;
-    var showAtMs=Math.max(0, ((vsl.durationSec||822)-(vsl.ctaLeadSec||15)))*1000;
+    var showAtMs=Math.max(0, (vsl.ctaShowAtSec||40))*1000;
     setTimeout(function(){ var el=document.getElementById('spVslActions'); if(el) el.style.display='block'; }, showAtMs);
   }
   var playerEl=document.getElementById('vid-'+vsl.embedId);
   if(playerEl) playerEl.addEventListener('click', startCountdown, {once:true});
   setTimeout(startCountdown, 20000);
   document.getElementById('spVslBuy').onclick=goToPricing;
-  document.getElementById('spSkipVideo').onclick=renderSale;
 }
 // Lleva directo a la oferta y hace scroll a la sección de precio (id
 // "spPricing" en renderSale), en vez de dejar a la persona arriba de todo.
@@ -1188,6 +1183,14 @@ function renderSale(){
       b.dataset.tracked='1';
       b.addEventListener('click', function(e){
         e.preventDefault();
+        // El checkout real (pago) vive en otro dominio (ImpulTienda), así
+        // que el evento de Compra hay que dispararlo ALLÁ, en la página de
+        // confirmación, con este mismo pixel (1420771603284350) — acá solo
+        // podemos avisarle a Meta que alguien inició el checkout.
+        if(typeof fbq==='function'){
+          var tier=CONFIG.TIERS[state.tier]||{};
+          fbq('track','InitiateCheckout',{value:tier.nowUsd||0,currency:'USD'});
+        }
         window.location.href=checkoutUrlWithParams();
       });
     }
