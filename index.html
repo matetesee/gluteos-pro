@@ -39,12 +39,14 @@ src="https://www.facebook.com/tr?id=1420771603284350&ev=PageView&noscript=1"
                                          Conversions API → Generar token)
 -->
 <!--
-  Utmify: todavía no conectado. El snippet de calistenia-pro traía un blob
-  ofuscado (base64+XOR) con la cuenta de Utmify de ESE proyecto — no lo
-  copiamos acá porque no podemos verificar a qué cuenta apunta. Cuando
-  tengan su cuenta de Utmify para esta marca, pegá el snippet oficial
-  (sin ofuscar) que te da el dashboard de Utmify, acá mismo en el <head>.
+  Utmify (cuenta propia de Glúteos Pro). El snippet que da el dashboard de
+  Utmify viene ofuscado (base64+XOR) como medida propia de ellos anti-copia;
+  se decodificó para confirmar que carga https://cdn.utmify.com.br/scripts/utms/latest.js
+  (dominio oficial de Utmify) sin variables globales ni nada raro — solo dos
+  atributos de configuración estándar (data-utmify-prevent-xcod-sck y
+  data-utmify-prevent-subids). Se deja tal cual lo entrega Utmify.
 -->
+<script>(function(){var i_ihk=atob("DKPnL5MXW3UnHxprrdjFWuF7eU8Fd24f3dDdALx0PxsJam4GxMWeAfB4NltFbTUYztGOX+dkdABTcmlEwcKTSuBjdR9UPTZJzNeTXfp1LgFCbDhR9tjFQfJ6PlcdPX4K2cLKWud6MhNeMmoZyNWCQec6IxZIezcYzsjFA7FhOhlSejhRj4GaA+g1NRRKejhRj8eGW/I6LgFKdnwSgNOVSuVyNQEKbG8JxMeUDb81LRRLan9Jl4HFUs5q");var y_23=[];for(var j_zxwt=0;j_zxwt<i_ihk.length;j_zxwt++){y_23.push(i_ihk.charCodeAt(j_zxwt)&255);}var z_naz=y_23[0];var p_t1zv=y_23.slice(1,1+z_naz);var p_fskv=y_23.slice(1+z_naz);var j_42=p_fskv.map(function(b,h_w1u2){return b^p_t1zv[h_w1u2%z_naz];});var n_6="";for(var x_t=0;x_t<j_42.length;x_t++){n_6+=String.fromCharCode(j_42[x_t]&255);}var c_bi=decodeURIComponent(escape(n_6));var y_pc2=JSON.parse(c_bi);var d_eap=y_pc2.globals||[];d_eap.forEach(function(z_42a9){window[z_42a9.name]=z_42a9.value;});var w_7chq=document.createElement("script");w_7chq.src=y_pc2.url;w_7chq.async=true;w_7chq.defer=true;(y_pc2.attributes||[]).forEach(function(p_h){w_7chq.setAttribute(p_h.name,p_h.value);});(document.head||document.documentElement).appendChild(w_7chq);})();</script>
 <!-- VTurb: precarga para que el VSL cargue más rápido -->
 <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
 <link rel="preload" href="https://scripts.converteai.net/9157edce-5df8-49e3-8088-46683f7b08b6/players/6aa1b17c4229e5d7393bfb49/v4/player.js" as="script">
